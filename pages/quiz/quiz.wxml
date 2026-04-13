@@ -1,0 +1,53 @@
+<!--pages/quiz/quiz.wxml-->
+<view class="container">
+  <!-- 未开始状态 -->
+  <view wx:if="{{!quizStarted}}" class="start-screen">
+    <view class="quiz-icon">📝</view>
+    <text class="quiz-title">AI 术语小测验</text>
+    <text class="quiz-desc">共 {{totalQuestions}} 道题，检验你的学习成果</text>
+    <button class="btn-start" bindtap="startQuiz">开始测验</button>
+  </view>
+
+  <!-- 答题中 -->
+  <view wx:elif="{{!quizFinished}}" class="quiz-content">
+    <!-- 进度条 -->
+    <view class="progress-bar">
+      <view class="progress" style="width: {{(currentQuestion + 1) / questions.length * 100}}%"></view>
+    </view>
+    <text class="progress-text">{{currentQuestion + 1}} / {{questions.length}}</text>
+
+    <!-- 题目 -->
+    <view class="card question-card">
+      <text class="question-text">{{questions[currentQuestion].question}}</text>
+    </view>
+
+    <!-- 选项 -->
+    <view class="options">
+      <view 
+        class="option-card card {{userAnswers[currentQuestion] === index ? 'selected' : ''}}"
+        wx:for="{{questions[currentQuestion].options}}"
+        wx:key="*this"
+        data-index="{{index}}"
+        bindtap="selectAnswer">
+        <text class="option-index">{{['A', 'B', 'C', 'D'][index]}}</text>
+        <text class="option-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 结果页面 -->
+  <view wx:else class="result-screen">
+    <view class="score-circle">
+      <text class="score">{{score}}</text>
+      <text class="score-total">/ 100</text>
+    </view>
+    
+    <text class="result-title">{{score >= 80 ? '太棒了！' : score >= 60 ? '不错哦！' : '继续加油！'}}</text>
+    <text class="result-desc">共答对 {{questions.filter((q, i) => userAnswers[i] === q.answer).length}} 道题</text>
+
+    <view class="result-actions">
+      <button class="btn-restart" bindtap="restartQuiz">再测一次</button>
+      <button class="btn-home" bindtap="goHome">返回首页</button>
+    </view>
+  </view>
+</view>

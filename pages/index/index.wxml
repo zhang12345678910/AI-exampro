@@ -1,0 +1,64 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- 分类选择 -->
+  <scroll-view class="category-scroll" scroll-x enable-flex>
+    <view class="category-list">
+      <view 
+        class="category-item {{category === 'all' ? 'active' : ''}}" 
+        data-category="all"
+        bindtap="onCategoryChange">全部</view>
+      <view 
+        class="category-item {{category === item ? 'active' : ''}}" 
+        wx:for="{{categories}}" 
+        wx:key="*this"
+        data-category="{{item}}"
+        bindtap="onCategoryChange">{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 术语列表 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+
+  <view wx:else class="term-list">
+    <view 
+      class="term-card card" 
+      wx:for="{{terms}}" 
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTermTap">
+      
+      <view class="term-header">
+        <text class="term-name">{{item.name}}</text>
+        <text class="term-name-en">{{item.nameEn}}</text>
+      </view>
+
+      <view class="term-preview">
+        <text>{{item.definition}}</text>
+      </view>
+
+      <view class="term-footer">
+        <view class="term-tags">
+          <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+        </view>
+        <text class="difficulty difficulty-{{item.difficulty}}">
+          难度：{{item.difficulty === 1 ? '★☆☆' : item.difficulty === 2 ? '★★☆' : '★★★'}}
+        </text>
+      </view>
+
+      <view class="term-actions">
+        <button 
+          class="btn-learn" 
+          size="mini" 
+          data-id="{{item.id}}"
+          bindtap="markLearned">标记已学</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{!loading && terms.length === 0}}" class="empty">
+    <text>暂无数据</text>
+  </view>
+</view>

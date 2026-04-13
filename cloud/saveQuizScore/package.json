@@ -1,0 +1,9 @@
+{
+  "name": "saveQuizScore",
+  "version": "1.0.0",
+  "description": "保存测验成绩云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

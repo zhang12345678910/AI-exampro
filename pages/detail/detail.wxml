@@ -1,0 +1,62 @@
+<!--pages/detail/detail.wxml-->
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+
+  <view wx:else class="detail-content">
+    <!-- 术语名称 -->
+    <view class="card term-header">
+      <text class="term-name">{{term.name}}</text>
+      <text class="term-name-en">{{term.nameEn}}</text>
+      
+      <view class="term-meta">
+        <text class="tag">{{term.category}}</text>
+        <text class="difficulty difficulty-{{term.difficulty}}">
+          难度：{{term.difficulty === 1 ? '★☆☆' : term.difficulty === 2 ? '★★☆' : '★★★'}}
+        </text>
+      </view>
+    </view>
+
+    <!-- 定义 -->
+    <view class="card section">
+      <text class="section-title">📖 定义</text>
+      <text class="section-content">{{term.definition}}</text>
+    </view>
+
+    <!-- 示例 -->
+    <view class="card section">
+      <text class="section-title">💡 示例</text>
+      <text class="section-content example">{{term.example}}</text>
+    </view>
+
+    <!-- 标签 -->
+    <view class="card section">
+      <text class="section-title">🏷️ 标签</text>
+      <view class="tags">
+        <text class="tag" wx:for="{{term.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="actions">
+      <button 
+        class="btn-action {{isLearned ? 'btn-done' : 'btn-primary'}}"
+        bindtap="markLearned"
+        disabled="{{isLearned}}">
+        {{isLearned ? '✓ 已学习' : '标记已学'}}
+      </button>
+      
+      <button 
+        class="btn-action {{isCollected ? 'btn-collected' : 'btn-outline'}}"
+        bindtap="toggleCollect">
+        {{isCollected ? '★ 已收藏' : '☆ 收藏'}}
+      </button>
+    </view>
+
+    <!-- 分享提示 -->
+    <view class="share-tip">
+      <text>点击右上角分享给朋友一起学习</text>
+    </view>
+  </view>
+</view>

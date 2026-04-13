@@ -1,0 +1,82 @@
+<!--pages/collection/collection.wxml-->
+<view class="container">
+  <!-- Tab 切换 -->
+  <view class="tabs">
+    <view 
+      class="tab {{currentTab === 0 ? 'active' : ''}}"
+      data-index="0"
+      bindtap="onTabChange">收藏 ({{collectedTerms.length}})</view>
+    <view 
+      class="tab {{currentTab === 1 ? 'active' : ''}}"
+      data-index="1"
+      bindtap="onTabChange">已学 ({{learnedTerms.length}})</view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 收藏列表 -->
+  <view wx:if="{{!loading && currentTab === 0}}" class="list">
+    <view wx:if="{{collectedTerms.length === 0}}" class="empty">
+      <text class="empty-icon">⭐</text>
+      <text class="empty-text">暂无收藏</text>
+      <text class="empty-desc">在术语详情页点击收藏按钮添加</text>
+    </view>
+
+    <view wx:else class="term-list">
+      <view 
+        class="term-item card"
+        wx:for="{{collectedTerms}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onTermTap">
+        
+        <view class="term-info">
+          <text class="term-name">{{item.name}}</text>
+          <text class="term-name-en">{{item.nameEn}}</text>
+          <text class="term-preview">{{item.definition}}</text>
+        </view>
+
+        <button 
+          class="btn-remove"
+          size="mini"
+          data-id="{{item.id}}"
+          catchtap="uncollect">取消</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已学列表 -->
+  <view wx:if="{{!loading && currentTab === 1}}" class="list">
+    <view wx:if="{{learnedTerms.length === 0}}" class="empty">
+      <text class="empty-icon">📚</text>
+      <text class="empty-text">暂无学习记录</text>
+      <text class="empty-desc">开始学习第一个术语吧！</text>
+      <button class="btn-start-learn" open-type="switchTab" url="/pages/index/index">去学习</button>
+    </view>
+
+    <view wx:else class="term-list">
+      <view 
+        class="term-item card"
+        wx:for="{{learnedTerms}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onTermTap">
+        
+        <view class="term-info">
+          <text class="term-name">{{item.name}}</text>
+          <text class="term-name-en">{{item.nameEn}}</text>
+          <view class="learned-badge">✓ 已学习</view>
+        </view>
+
+        <button 
+          class="btn-remove"
+          size="mini"
+          data-id="{{item.id}}"
+          catchtap="unlearn">移除</button>
+      </view>
+    </view>
+  </view>
+</view>

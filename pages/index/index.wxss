@@ -1,0 +1,108 @@
+/* pages/index/index.wxss */
+.container {
+  padding: 0;
+}
+
+/* 分类滚动条 */
+.category-scroll {
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.category-list {
+  display: inline-flex;
+}
+
+.category-item {
+  display: inline-block;
+  padding: 12rpx 24rpx;
+  margin-right: 16rpx;
+  background-color: #f5f5f5;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.category-item.active {
+  background-color: #07c160;
+  color: #fff;
+}
+
+/* 加载状态 */
+.loading, .empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 术语列表 */
+.term-list {
+  padding: 20rpx;
+}
+
+.term-card {
+  margin-bottom: 20rpx;
+}
+
+.term-header {
+  margin-bottom: 16rpx;
+}
+
+.term-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+}
+
+.term-name-en {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  display: block;
+}
+
+.term-preview {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.term-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.term-tags {
+  flex: 1;
+}
+
+.difficulty {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.term-actions {
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 16rpx;
+}
+
+.btn-learn {
+  background-color: #07c160;
+  color: #fff;
+  border: none;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+  padding: 12rpx 24rpx;
+}

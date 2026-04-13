@@ -1,0 +1,115 @@
+/* pages/detail/detail.wxss */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400rpx;
+  color: #999;
+}
+
+.detail-content {
+  padding: 20rpx;
+}
+
+.term-header {
+  text-align: center;
+}
+
+.term-name {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.term-name-en {
+  font-size: 28rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.term-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.section {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.section-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+  display: block;
+}
+
+.section-content.example {
+  background-color: #f9f9f9;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  border-left: 4rpx solid #07c160;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.btn-action {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #07c160;
+  color: #fff;
+}
+
+.btn-done {
+  background-color: #ccc;
+  color: #666;
+}
+
+.btn-outline {
+  background-color: #fff;
+  color: #07c160;
+  border: 2rpx solid #07c160;
+}
+
+.btn-collected {
+  background-color: #fff;
+  color: #ff9800;
+  border: 2rpx solid #ff9800;
+}
+
+.share-tip {
+  text-align: center;
+  color: #999;
+  font-size: 24rpx;
+  padding: 20rpx;
+}

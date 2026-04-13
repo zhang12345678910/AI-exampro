@@ -1,0 +1,502 @@
+[
+  {
+    "id": "term_001",
+    "name": "人工智能",
+    "nameEn": "Artificial Intelligence",
+    "category": "基础概念",
+    "definition": "让计算机模拟人类智能的技术，包括学习、推理、感知、理解语言等能力。",
+    "example": "比如：Siri 能听懂你说话并回答问题，这就是人工智能的应用。",
+    "difficulty": 1,
+    "tags": ["AI", "基础", "热门"]
+  },
+  {
+    "id": "term_002",
+    "name": "机器学习",
+    "nameEn": "Machine Learning",
+    "category": "基础概念",
+    "definition": "机器学习是人工智能的一个分支，让计算机从数据中学习规律，而无需显式编程。",
+    "example": "比如：给计算机看很多猫的图片，它能学会识别新图片中是否有猫。",
+    "difficulty": 1,
+    "tags": ["ML", "基础", "核心"]
+  },
+  {
+    "id": "term_003",
+    "name": "深度学习",
+    "nameEn": "Deep Learning",
+    "category": "基础概念",
+    "definition": "深度学习是机器学习的子领域，使用多层神经网络来学习数据的复杂模式。",
+    "example": "比如：AlphaGo 用深度学习学会了下围棋，并击败了人类冠军。",
+    "difficulty": 2,
+    "tags": ["DL", "神经网络", "核心"]
+  },
+  {
+    "id": "term_004",
+    "name": "神经网络",
+    "nameEn": "Neural Network",
+    "category": "基础概念",
+    "definition": "模仿人脑神经元结构的计算模型，由多层节点（神经元）组成，用于处理复杂任务。",
+    "example": "比如：像人脑一样，输入图片→多层处理→输出\"这是猫\"。",
+    "difficulty": 2,
+    "tags": ["神经网络", "基础"]
+  },
+  {
+    "id": "term_005",
+    "name": "大语言模型",
+    "nameEn": "Large Language Model",
+    "category": "热门概念",
+    "definition": "在大量文本数据上训练的深度学习模型，能够理解和生成人类语言。",
+    "example": "比如：ChatGPT、文心一言都是大语言模型，能和你对话、写文章。",
+    "difficulty": 2,
+    "tags": ["LLM", "热门", "NLP"]
+  },
+  {
+    "id": "term_006",
+    "name": "生成式 AI",
+    "nameEn": "Generative AI",
+    "category": "热门概念",
+    "definition": "能够创造新内容的 AI，包括文本、图片、音乐、代码等，而不仅仅是分析现有数据。",
+    "example": "比如：让 AI 画一幅\"夕阳下的海滩\"，它能生成一张全新的图片。",
+    "difficulty": 1,
+    "tags": ["AIGC", "热门", "生成"]
+  },
+  {
+    "id": "term_007",
+    "name": "自然语言处理",
+    "nameEn": "Natural Language Processing",
+    "category": "技术领域",
+    "definition": "让计算机理解、处理和生成人类语言的技术。",
+    "example": "比如：翻译软件、语音助手、情感分析都用到了 NLP 技术。",
+    "difficulty": 2,
+    "tags": ["NLP", "语言", "应用"]
+  },
+  {
+    "id": "term_008",
+    "name": "计算机视觉",
+    "nameEn": "Computer Vision",
+    "category": "技术领域",
+    "definition": "让计算机\"看懂\"图像和视频的技术，包括识别、检测、分割等任务。",
+    "example": "比如：人脸识别门禁、自动驾驶识别行人、医学影像分析。",
+    "difficulty": 2,
+    "tags": ["CV", "图像", "应用"]
+  },
+  {
+    "id": "term_009",
+    "name": "监督学习",
+    "nameEn": "Supervised Learning",
+    "category": "学习方法",
+    "definition": "使用带标签的数据训练模型，让模型学会从输入预测输出。",
+    "example": "比如：给模型看很多标注了\"猫/狗\"的图片，让它学会分类新图片。",
+    "difficulty": 2,
+    "tags": ["学习", "分类"]
+  },
+  {
+    "id": "term_010",
+    "name": "无监督学习",
+    "nameEn": "Unsupervised Learning",
+    "category": "学习方法",
+    "definition": "使用无标签的数据训练模型，让模型自己发现数据中的模式和结构。",
+    "example": "比如：把一堆客户数据输入，模型自动发现几类不同的客户群体。",
+    "difficulty": 2,
+    "tags": ["学习", "聚类"]
+  },
+  {
+    "id": "term_011",
+    "name": "强化学习",
+    "nameEn": "Reinforcement Learning",
+    "category": "学习方法",
+    "definition": "通过与环境互动、获得奖励或惩罚来学习最优策略的方法。",
+    "example": "比如：AlphaGo 通过和自己下棋，赢了加分、输了减分，不断改进棋艺。",
+    "difficulty": 3,
+    "tags": ["学习", "决策"]
+  },
+  {
+    "id": "term_012",
+    "name": "训练集",
+    "nameEn": "Training Set",
+    "category": "数据概念",
+    "definition": "用于训练模型的数据集合，模型从这些数据中学习规律。",
+    "example": "比如：用 10000 张猫狗图片训练模型，这 10000 张就是训练集。",
+    "difficulty": 1,
+    "tags": ["数据", "基础"]
+  },
+  {
+    "id": "term_013",
+    "name": "测试集",
+    "nameEn": "Test Set",
+    "category": "数据概念",
+    "definition": "用于评估模型性能的数据集合，不参与训练，用来检验模型效果。",
+    "example": "比如：训练完后，用 1000 张新图片测试模型，看它能认对多少。",
+    "difficulty": 1,
+    "tags": ["数据", "基础"]
+  },
+  {
+    "id": "term_014",
+    "name": "过拟合",
+    "nameEn": "Overfitting",
+    "category": "问题概念",
+    "definition": "模型在训练数据上表现很好，但在新数据上表现差，因为它\"死记硬背\"了训练数据。",
+    "example": "比如：学生背下了所有练习题答案，但考试遇到新题就不会了。",
+    "difficulty": 2,
+    "tags": ["问题", "重要"]
+  },
+  {
+    "id": "term_015",
+    "name": "欠拟合",
+    "nameEn": "Underfitting",
+    "category": "问题概念",
+    "definition": "模型太简单，连训练数据都学不好，在训练集和测试集上表现都差。",
+    "example": "比如：学生上课没听懂，练习题和考试都不会做。",
+    "difficulty": 2,
+    "tags": ["问题", "重要"]
+  },
+  {
+    "id": "term_016",
+    "name": "特征",
+    "nameEn": "Feature",
+    "category": "数据概念",
+    "definition": "描述数据的属性或特点，是模型做判断的依据。",
+    "example": "比如：判断猫的特征可能有：有毛、尖耳朵、长胡须、会喵喵叫。",
+    "difficulty": 1,
+    "tags": ["数据", "基础"]
+  },
+  {
+    "id": "term_017",
+    "name": "标签",
+    "nameEn": "Label",
+    "category": "数据概念",
+    "definition": "数据的正确答案或分类，用于监督学习。",
+    "example": "比如：一张猫的图片，标签就是\"猫\"；一封邮件，标签是\"垃圾邮件\"或\"正常邮件\"。",
+    "difficulty": 1,
+    "tags": ["数据", "基础"]
+  },
+  {
+    "id": "term_018",
+    "name": "分类",
+    "nameEn": "Classification",
+    "category": "任务类型",
+    "definition": "将数据分配到预定义的类别中的任务。",
+    "example": "比如：判断邮件是垃圾邮件还是正常邮件；判断图片是猫还是狗。",
+    "difficulty": 1,
+    "tags": ["任务", "基础"]
+  },
+  {
+    "id": "term_019",
+    "name": "回归",
+    "nameEn": "Regression",
+    "category": "任务类型",
+    "definition": "预测连续数值的任务，输出是一个数字而不是类别。",
+    "example": "比如：预测房价、预测气温、预测股票价格。",
+    "difficulty": 2,
+    "tags": ["任务", "预测"]
+  },
+  {
+    "id": "term_020",
+    "name": "聚类",
+    "nameEn": "Clustering",
+    "category": "任务类型",
+    "definition": "将相似的数据自动分到同一组的任务，不需要预先定义类别。",
+    "example": "比如：把客户按购买习惯自动分成几类，但不知道每类具体是什么。",
+    "difficulty": 2,
+    "tags": ["任务", "分组"]
+  },
+  {
+    "id": "term_021",
+    "name": "Transformer",
+    "nameEn": "Transformer",
+    "category": "模型架构",
+    "definition": "一种神经网络架构，使用自注意力机制，擅长处理序列数据，是当前大语言模型的基础。",
+    "example": "比如：GPT、BERT 都是基于 Transformer 架构的模型。",
+    "difficulty": 3,
+    "tags": ["架构", "重要", "NLP"]
+  },
+  {
+    "id": "term_022",
+    "name": "注意力机制",
+    "nameEn": "Attention Mechanism",
+    "category": "模型架构",
+    "definition": "让模型在处理信息时，能够关注重要的部分，忽略不重要的部分。",
+    "example": "比如：读句子时，重点关注关键词，而不是每个字都同等对待。",
+    "difficulty": 3,
+    "tags": ["机制", "重要"]
+  },
+  {
+    "id": "term_023",
+    "name": "卷积神经网络",
+    "nameEn": "CNN",
+    "category": "模型架构",
+    "definition": "一种专门处理图像等网格数据的神经网络，通过卷积操作提取局部特征。",
+    "example": "比如：识别图片中的物体、人脸识别、医学影像分析常用 CNN。",
+    "difficulty": 3,
+    "tags": ["CNN", "图像", "架构"]
+  },
+  {
+    "id": "term_024",
+    "name": "循环神经网络",
+    "nameEn": "RNN",
+    "category": "模型架构",
+    "definition": "一种处理序列数据的神经网络，有\"记忆\"能力，适合处理有时间顺序的数据。",
+    "example": "比如：语音识别、文本生成、股票预测等序列任务。",
+    "difficulty": 3,
+    "tags": ["RNN", "序列", "架构"]
+  },
+  {
+    "id": "term_025",
+    "name": "生成对抗网络",
+    "nameEn": "GAN",
+    "category": "模型架构",
+    "definition": "由生成器和判别器两个网络互相\"对抗\"训练，能生成逼真的假数据。",
+    "example": "比如：生成假人脸、假画作、老照片修复、风格迁移。",
+    "difficulty": 3,
+    "tags": ["GAN", "生成", "图像"]
+  },
+  {
+    "id": "term_026",
+    "name": "预训练模型",
+    "nameEn": "Pre-trained Model",
+    "category": "模型概念",
+    "definition": "在大规模数据上预先训练好的模型，可以直接使用或微调后用于特定任务。",
+    "example": "比如：BERT、GPT 都是预训练模型，可以拿来直接做 NLP 任务。",
+    "difficulty": 2,
+    "tags": ["模型", "迁移学习"]
+  },
+  {
+    "id": "term_027",
+    "name": "微调",
+    "nameEn": "Fine-tuning",
+    "category": "训练方法",
+    "definition": "在预训练模型的基础上，用特定领域的数据继续训练，让模型适应特定任务。",
+    "example": "比如：用通用语言模型 + 医疗数据微调 = 医疗问答模型。",
+    "difficulty": 2,
+    "tags": ["训练", "迁移学习"]
+  },
+  {
+    "id": "term_028",
+    "name": "提示工程",
+    "nameEn": "Prompt Engineering",
+    "category": "应用技术",
+    "definition": "设计合适的提示词，让大语言模型更好地理解和完成任务。",
+    "example": "比如：\"请用小学生能听懂的话解释量子力学\"比\"解释量子力学\"效果更好。",
+    "difficulty": 1,
+    "tags": ["Prompt", "LLM", "实用"]
+  },
+  {
+    "id": "term_029",
+    "name": "零样本学习",
+    "nameEn": "Zero-shot Learning",
+    "category": "学习方法",
+    "definition": "模型在没有见过某类任务的训练数据的情况下，能够完成该任务。",
+    "example": "比如：模型没学过翻译中文→法语，但能直接翻译，因为它学过中文和法语。",
+    "difficulty": 3,
+    "tags": ["学习", "LLM"]
+  },
+  {
+    "id": "term_030",
+    "name": "少样本学习",
+    "nameEn": "Few-shot Learning",
+    "category": "学习方法",
+    "definition": "模型只通过少量示例就能学会新任务。",
+    "example": "比如：给模型看 3 个例子，它就能理解任务并处理新的输入。",
+    "difficulty": 3,
+    "tags": ["学习", "LLM"]
+  },
+  {
+    "id": "term_031",
+    "name": "嵌入",
+    "nameEn": "Embedding",
+    "category": "技术概念",
+    "definition": "将离散的对象（如单词）映射到连续向量空间的技术，相似的对象在空间中距离更近。",
+    "example": "比如：\"猫\"和\"狗\"的向量距离比\"猫\"和\"汽车\"更近，因为它们都是动物。",
+    "difficulty": 3,
+    "tags": ["向量", "表示"]
+  },
+  {
+    "id": "term_032",
+    "name": "词向量",
+    "nameEn": "Word Embedding",
+    "category": "技术概念",
+    "definition": "将单词表示为稠密向量的技术，能捕捉词语之间的语义关系。",
+    "example": "比如：word2vec 生成的词向量，\"国王\"-\"男\"+\"女\"≈\"女王\"。",
+    "difficulty": 3,
+    "tags": ["NLP", "向量"]
+  },
+  {
+    "id": "term_033",
+    "name": "损失函数",
+    "nameEn": "Loss Function",
+    "category": "训练概念",
+    "definition": "衡量模型预测结果与真实答案差距的函数，训练目标是最小化损失。",
+    "example": "比如：预测房价 100 万，实际 120 万，损失函数计算这个差距。",
+    "difficulty": 2,
+    "tags": ["训练", "优化"]
+  },
+  {
+    "id": "term_034",
+    "name": "梯度下降",
+    "nameEn": "Gradient Descent",
+    "category": "优化算法",
+    "definition": "一种优化算法，通过沿着损失函数梯度反方向更新参数，逐步减小损失。",
+    "example": "比如：下山时每一步都往最陡的下坡方向走，最终到达山谷最低点。",
+    "difficulty": 3,
+    "tags": ["优化", "训练"]
+  },
+  {
+    "id": "term_035",
+    "name": "反向传播",
+    "nameEn": "Backpropagation",
+    "category": "训练算法",
+    "definition": "神经网络训练的核心算法，从输出层向输入层传播误差，计算每层参数的梯度。",
+    "example": "比如：模型预测错了，从后往前找哪一层的问题最大，然后调整那层的参数。",
+    "difficulty": 3,
+    "tags": ["训练", "核心"]
+  },
+  {
+    "id": "term_036",
+    "name": "学习率",
+    "nameEn": "Learning Rate",
+    "category": "超参数",
+    "definition": "控制每次参数更新步长大小的超参数，太大可能错过最优解，太小训练太慢。",
+    "example": "比如下山的步长：步长太大可能跨过最低点，步长太小要走很久。",
+    "difficulty": 2,
+    "tags": ["超参数", "训练"]
+  },
+  {
+    "id": "term_037",
+    "name": "批次大小",
+    "nameEn": "Batch Size",
+    "category": "超参数",
+    "definition": "每次参数更新使用的样本数量，影响训练速度和稳定性。",
+    "example": "比如：batch_size=32 表示每次用 32 个样本计算梯度后更新一次参数。",
+    "difficulty": 2,
+    "tags": ["超参数", "训练"]
+  },
+  {
+    "id": "term_038",
+    "name": "Epoch",
+    "nameEn": "Epoch",
+    "category": "训练概念",
+    "definition": "模型遍历完整个训练数据集一次的过程。",
+    "example": "比如：10000 张图片，batch_size=100，需要 100 次更新才能完成 1 个 epoch。",
+    "difficulty": 1,
+    "tags": ["训练", "基础"]
+  },
+  {
+    "id": "term_039",
+    "name": "准确率",
+    "nameEn": "Accuracy",
+    "category": "评估指标",
+    "definition": "模型预测正确的样本数占总样本数的比例。",
+    "example": "比如：100 张图片认对了 95 张，准确率就是 95%。",
+    "difficulty": 1,
+    "tags": ["指标", "评估"]
+  },
+  {
+    "id": "term_040",
+    "name": "精确率",
+    "nameEn": "Precision",
+    "category": "评估指标",
+    "definition": "模型预测为正的样本中，真正为正的比例。",
+    "example": "比如：模型说 10 封是垃圾邮件，实际 8 封是，精确率=80%。",
+    "difficulty": 2,
+    "tags": ["指标", "评估"]
+  },
+  {
+    "id": "term_041",
+    "name": "召回率",
+    "nameEn": "Recall",
+    "category": "评估指标",
+    "definition": "所有真正为正的样本中，被模型正确找出的比例。",
+    "example": "比如：实际 100 封垃圾邮件，模型找出了 80 封，召回率=80%。",
+    "difficulty": 2,
+    "tags": ["指标", "评估"]
+  },
+  {
+    "id": "term_042",
+    "name": "F1 分数",
+    "nameEn": "F1 Score",
+    "category": "评估指标",
+    "definition": "精确率和召回率的调和平均数，综合衡量模型性能。",
+    "example": "比如：精确率 80%、召回率 60%，F1 分数约 68.6%。",
+    "difficulty": 2,
+    "tags": ["指标", "综合"]
+  },
+  {
+    "id": "term_043",
+    "name": "混淆矩阵",
+    "nameEn": "Confusion Matrix",
+    "category": "评估工具",
+    "definition": "展示模型预测结果的表格，包含真正例、假正例、真反例、假反例。",
+    "example": "比如：分类任务中，看模型把多少正例猜成正例、多少反例猜成正例等。",
+    "difficulty": 2,
+    "tags": ["指标", "分析"]
+  },
+  {
+    "id": "term_044",
+    "name": "交叉验证",
+    "nameEn": "Cross Validation",
+    "category": "评估方法",
+    "definition": "将数据分成多份，轮流用其中一份做测试集，其余做训练集，多次评估取平均。",
+    "example": "比如：5 折交叉验证，数据分 5 份，做 5 次实验，每次用 1 份测试、4 份训练。",
+    "difficulty": 2,
+    "tags": ["评估", "验证"]
+  },
+  {
+    "id": "term_045",
+    "name": "数据增强",
+    "nameEn": "Data Augmentation",
+    "category": "数据技术",
+    "definition": "通过对现有数据进行变换生成新数据，扩充训练集规模。",
+    "example": "比如：图片旋转、翻转、裁剪、调色；文本同义词替换、语序调整。",
+    "difficulty": 2,
+    "tags": ["数据", "增强"]
+  },
+  {
+    "id": "term_046",
+    "name": "迁移学习",
+    "nameEn": "Transfer Learning",
+    "category": "学习方法",
+    "definition": "将在一个任务上学到的知识应用到另一个相关任务上。",
+    "example": "比如：学过识别猫的模型，稍加调整就能识别其他动物。",
+    "difficulty": 2,
+    "tags": ["学习", "迁移"]
+  },
+  {
+    "id": "term_047",
+    "name": "知识蒸馏",
+    "nameEn": "Knowledge Distillation",
+    "category": "模型压缩",
+    "definition": "将大模型（教师）的知识迁移到小模型（学生），让小模型达到接近大模型的效果。",
+    "example": "比如：把 100GB 的大模型压缩成 1GB 的小模型，效果差不多但运行更快。",
+    "difficulty": 3,
+    "tags": ["压缩", "优化"]
+  },
+  {
+    "id": "term_048",
+    "name": "模型量化",
+    "nameEn": "Model Quantization",
+    "category": "模型压缩",
+    "definition": "将模型参数从高精度（如 32 位浮点数）转换为低精度（如 8 位整数），减小模型体积。",
+    "example": "比如：模型从 4GB 压缩到 1GB，可以在手机上运行。",
+    "difficulty": 3,
+    "tags": ["压缩", "部署"]
+  },
+  {
+    "id": "term_049",
+    "name": "推理",
+    "nameEn": "Inference",
+    "category": "部署概念",
+    "definition": "使用训练好的模型对新数据进行预测的过程。",
+    "example": "比如：训练好的猫狗识别模型，用来判断新图片是猫还是狗，这就是推理。",
+    "difficulty": 1,
+    "tags": ["部署", "应用"]
+  },
+  {
+    "id": "term_050",
+    "name": "边缘计算",
+    "nameEn": "Edge Computing",
+    "category": "部署概念",
+    "definition": "在设备本地（而非云端）运行 AI 模型，减少延迟、保护隐私。",
+    "example": "比如：手机人脸识别解锁、智能音箱语音识别，都是在设备本地完成。",
+    "difficulty": 2,
+    "tags": ["部署", "边缘"]
+  }
+]
