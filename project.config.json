@@ -44,7 +44,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
-  "appid": "wxXXXXXXXXXXXXXXXX",
+  "appid": "wxcab385c6b56e74f7",
   "projectname": "ai-terms-miniprogram",
   "cloudfunctionRoot": "cloud/",
   "cloud": {
