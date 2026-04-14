@@ -112,6 +112,20 @@
   color: #fff;
 }
 
+.btn-collect {
+  background-color: #fff;
+  color: #ff9800;
+  border: 2rpx solid #ff9800;
+  margin-left: 12rpx;
+}
+
+.btn-collected {
+  background-color: #fff3e0;
+  color: #ff9800;
+  border: 2rpx solid #ff9800;
+  margin-left: 12rpx;
+}
+
 /* 状态标记 */
 .term-status {
   display: flex;

@@ -17,22 +17,56 @@ Page({
 
   // 加载术语详情
   async loadTerm(termId) {
+    console.log('加载术语详情:', termId)
+    
     try {
       const res = await db.collection('terms').doc(termId).get()
-      this.setData({
-        term: res.data,
-        loading: false
-      })
       
-      // 检查收藏状态
-      this.checkCollectionStatus(termId)
+      if (res && res.data) {
+        this.setData({
+          term: res.data,
+          loading: false
+        })
+        
+        // 检查收藏状态
+        this.checkCollectionStatus(termId)
+      } else {
+        throw new Error('数据为空')
+      }
     } catch (err) {
       console.error('加载详情失败:', err)
       // 本地降级
-      const localTerms = require('../../data/terms.json')
-      const term = localTerms.find(t => t.id === termId)
-      if (term) {
-        this.setData({ term, loading: false })
+      try {
+        const localTerms = require('../../data/terms.json')
+        const term = localTerms.find(t => t.id === termId)
+        if (term) {
+          this.setData({ 
+            term: {
+              ...term,
+              definition: term.definition || '暂无定义',
+              example: term.example || '暂无示例'
+            },
+            loading: false 
+          })
+          wx.showToast({
+            title: '云数据加载失败，使用本地数据',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          this.setData({ loading: false })
+          wx.showToast({
+            title: '未找到术语',
+            icon: 'none'
+          })
+        }
+      } catch (localErr) {
+        console.error('本地数据加载失败:', localErr)
+        this.setData({ loading: false })
+        wx.showToast({
+          title: '数据加载失败',
+          icon: 'none'
+        })
       }
     }
   },

@@ -63,6 +63,11 @@
           size="mini" 
           data-id="{{item.id}}"
           bindtap="markLearned">{{learnedTermIds.includes(item.id) ? '已学' : '标记已学'}}</button>
+        <button 
+          class="btn-collect {{collectedTermIds.includes(item.id) ? 'btn-collected' : ''}}" 
+          size="mini" 
+          data-id="{{item.id}}"
+          bindtap="toggleCollect">{{collectedTermIds.includes(item.id) ? '⭐ 已收藏' : '☆ 收藏'}}</button>
       </view>
     </view>
   </view>

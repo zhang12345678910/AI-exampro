@@ -131,5 +131,35 @@ Page({
       console.error('标记失败:', err)
       wx.showToast({ title: '操作失败', icon: 'none' })
     }
+  },
+
+  // 收藏/取消收藏
+  async toggleCollect(e) {
+    const termId = e.currentTarget.dataset.id
+    const collectedTermIds = this.data.collectedTermIds
+    const isCollected = collectedTermIds.includes(termId)
+    
+    try {
+      await wx.cloud.callFunction({
+        name: 'toggleCollect',
+        data: { termId, collect: !isCollected }
+      })
+      
+      // 更新本地状态
+      if (isCollected) {
+        this.setData({
+          collectedTermIds: collectedTermIds.filter(id => id !== termId)
+        })
+        wx.showToast({ title: '已取消收藏', icon: 'none' })
+      } else {
+        this.setData({
+          collectedTermIds: [...collectedTermIds, termId]
+        })
+        wx.showToast({ title: '已收藏', icon: 'success' })
+      }
+    } catch (err) {
+      console.error('收藏失败:', err)
+      wx.showToast({ title: '操作失败', icon: 'none' })
+    }
   }
 })

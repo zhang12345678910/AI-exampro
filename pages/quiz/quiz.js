@@ -103,8 +103,20 @@ Page({
     let correctCount = 0
     const reviewList = []
     
+    // 检查是否所有题目都已作答
+    const answeredCount = this.data.userAnswers.filter(a => a !== undefined).length
+    const totalQuestions = this.data.questions.length
+    
+    console.log('提交测验', {
+      answeredCount,
+      totalQuestions,
+      userAnswers: this.data.userAnswers
+    })
+    
     this.data.questions.forEach((q, i) => {
-      const isCorrect = this.data.userAnswers[i] === q.answer
+      const userAnswerIndex = this.data.userAnswers[i]
+      const isCorrect = userAnswerIndex === q.answer
+      
       if (isCorrect) {
         correctCount++
       }
@@ -112,14 +124,16 @@ Page({
       // 生成回顾数据
       reviewList.push({
         question: q.question,
-        userAnswer: q.options[this.data.userAnswers[i]],
+        userAnswer: q.options[userAnswerIndex] || '未作答',
         correctAnswer: q.options[q.answer],
         isCorrect,
         explanation: q.explanation || '暂无解析'
       })
     })
 
-    const score = Math.round((correctCount / this.data.questions.length) * 100)
+    const score = Math.round((correctCount / totalQuestions) * 100)
+    
+    console.log('测验结果', { score, correctCount, totalQuestions })
     
     this.setData({
       quizFinished: true,
