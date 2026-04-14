@@ -1,9 +1,11 @@
 // pages/collection/collection.js
 const db = wx.cloud.database()
+const _ = db.command
 
 Page({
   data: {
     collectedTerms: [],
+    learnedTerms: [],
     loading: true,
     tabs: ['收藏', '已学'],
     currentTab: 0

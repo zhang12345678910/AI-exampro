@@ -47,12 +47,22 @@
         </text>
       </view>
 
+      <!-- 状态标记 -->
+      <view class="term-status">
+        <view class="status-badge learned" wx:if="{{learnedTermIds.includes(item.id)}}">
+          <text>✓ 已学</text>
+        </view>
+        <view class="status-badge collected" wx:if="{{collectedTermIds.includes(item.id)}}">
+          <text>⭐ 收藏</text>
+        </view>
+      </view>
+
       <view class="term-actions">
         <button 
-          class="btn-learn" 
+          class="btn-learn {{learnedTermIds.includes(item.id) ? 'btn-learned' : ''}}" 
           size="mini" 
           data-id="{{item.id}}"
-          bindtap="markLearned">标记已学</button>
+          bindtap="markLearned">{{learnedTermIds.includes(item.id) ? '已学' : '标记已学'}}</button>
       </view>
     </view>
   </view>

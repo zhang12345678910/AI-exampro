@@ -9,15 +9,36 @@ Page({
     loading: true,
     refreshing: false,
     category: 'all',
-    categories: ['全部', '基础概念', '热门概念', '技术领域', '学习方法', '模型架构']
+    categories: ['全部', '基础概念', '热门概念', '技术领域', '学习方法', '模型架构'],
+    learnedTermIds: [], // 已学术语 ID 列表
+    collectedTermIds: [] // 收藏术语 ID 列表
   },
 
   onLoad: function () {
+    this.loadUserStatus()
     this.loadTerms()
   },
 
   onShow: function () {
-    // 每次显示页面时刷新数据
+    // 每次显示页面时刷新用户状态
+    this.loadUserStatus()
+  },
+
+  // 加载用户学习状态
+  async loadUserStatus() {
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'getUserInfo'
+      })
+      if (res.result && res.result.success) {
+        this.setData({
+          learnedTermIds: res.result.data.learnedTerms || [],
+          collectedTermIds: res.result.data.collectedTerms || []
+        })
+      }
+    } catch (err) {
+      console.error('加载用户状态失败:', err)
+    }
   },
 
   // 下拉刷新
@@ -89,14 +110,26 @@ Page({
   // 标记已学
   async markLearned(e) {
     const termId = e.currentTarget.dataset.id
+    const learnedTermIds = this.data.learnedTermIds
+    
     try {
-      await wx.cloud.callFunction({
+      const res = await wx.cloud.callFunction({
         name: 'updateProgress',
         data: { action: 'markLearned', termId }
       })
-      wx.showToast({ title: '已标记', icon: 'success' })
+      
+      if (res.result && res.result.success) {
+        // 更新本地状态
+        if (!learnedTermIds.includes(termId)) {
+          this.setData({
+            learnedTermIds: [...learnedTermIds, termId]
+          })
+        }
+        wx.showToast({ title: '已标记为已学', icon: 'success' })
+      }
     } catch (err) {
       console.error('标记失败:', err)
+      wx.showToast({ title: '操作失败', icon: 'none' })
     }
   }
 })

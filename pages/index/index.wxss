@@ -106,3 +106,33 @@
   font-size: 24rpx;
   padding: 12rpx 24rpx;
 }
+
+.btn-learned {
+  background-color: #999;
+  color: #fff;
+}
+
+/* 状态标记 */
+.term-status {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6rpx 12rpx;
+  border-radius: 6rpx;
+  font-size: 22rpx;
+}
+
+.status-badge.learned {
+  background-color: #e8f5e9;
+  color: #07c160;
+}
+
+.status-badge.collected {
+  background-color: #fff3e0;
+  color: #ff9800;
+}
