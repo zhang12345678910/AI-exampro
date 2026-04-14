@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/detail/detail",
     "pages/quiz/quiz",
-    "pages/collection/collection"
+    "pages/collection/collection",
+    "pages/remind/remind"
   ],
   "window": {
     "navigationBarBackgroundColor": "#07c160",

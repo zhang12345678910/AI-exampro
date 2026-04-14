@@ -37,17 +37,53 @@
 
   <!-- 结果页面 -->
   <view wx:else class="result-screen">
-    <view class="score-circle">
-      <text class="score">{{score}}</text>
-      <text class="score-total">/ 100</text>
-    </view>
-    
-    <text class="result-title">{{score >= 80 ? '太棒了！' : score >= 60 ? '不错哦！' : '继续加油！'}}</text>
-    <text class="result-desc">共答对 {{questions.filter((q, i) => userAnswers[i] === q.answer).length}} 道题</text>
+    <!-- 成绩展示 -->
+    <view wx:if="{{!showReview}}" class="result-summary">
+      <view class="score-circle">
+        <text class="score">{{score}}</text>
+        <text class="score-total">/ 100</text>
+      </view>
+      
+      <text class="result-title">{{score >= 80 ? '太棒了！🎉' : score >= 60 ? '不错哦！👍' : '继续加油！💪'}}</text>
+      <text class="result-desc">共答对 {{correctCount}} / {{questions.length}} 道题</text>
 
-    <view class="result-actions">
-      <button class="btn-restart" bindtap="restartQuiz">再测一次</button>
-      <button class="btn-home" bindtap="goHome">返回首页</button>
+      <view class="result-actions">
+        <button class="btn-review" bindtap="showReviewPage">查看解析</button>
+        <button class="btn-restart" bindtap="restartQuiz">再测一次</button>
+        <button class="btn-home" bindtap="goHome">返回首页</button>
+        <button class="btn-share" open-type="share">分享成绩</button>
+      </view>
+    </view>
+
+    <!-- 答题回顾 -->
+    <view wx:else class="review-screen">
+      <view class="review-header">
+        <text class="review-title">答题回顾</text>
+        <button class="btn-close" bindtap="hideReview">关闭</button>
+      </view>
+
+      <scroll-view class="review-scroll" scroll-y>
+        <view class="review-list">
+          <view class="review-item card" wx:for="{{reviewList}}" wx:key="index">
+            <view class="review-status {{item.isCorrect ? 'correct' : 'wrong'}}">
+              <text>{{item.isCorrect ? '✓ 正确' : '✗ 错误'}}</text>
+            </view>
+            <text class="review-question">{{item.question}}</text>
+            <view class="review-answer {{item.isCorrect ? 'answer-correct' : 'answer-wrong'}}">
+              <text class="label">你的答案：</text>
+              <text>{{item.userAnswer}}</text>
+            </view>
+            <view class="review-answer answer-correct" wx:if="{{!item.isCorrect}}">
+              <text class="label">正确答案：</text>
+              <text>{{item.correctAnswer}}</text>
+            </view>
+            <view class="review-explanation">
+              <text class="label">解析：</text>
+              <text>{{item.explanation}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
     </view>
   </view>
 </view>

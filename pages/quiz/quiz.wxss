@@ -174,6 +174,15 @@
   font-size: 30rpx;
 }
 
+.btn-review {
+  background-color: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 30rpx;
+}
+
 .btn-home {
   background-color: #fff;
   color: #666;
@@ -181,4 +190,120 @@
   border-radius: 12rpx;
   padding: 24rpx;
   font-size: 30rpx;
+}
+
+.btn-share {
+  background-color: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 30rpx;
+}
+
+/* 答题回顾 */
+.review-screen {
+  padding: 0;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.review-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-close {
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 6rpx;
+}
+
+.review-scroll {
+  height: calc(100vh - 100rpx);
+  padding: 20rpx;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.review-item {
+  padding: 24rpx;
+}
+
+.review-status {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.review-status.correct {
+  background-color: #e8f5e9;
+  color: #07c160;
+}
+
+.review-status.wrong {
+  background-color: #ffebee;
+  color: #f44336;
+}
+
+.review-question {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 16rpx;
+  line-height: 1.5;
+}
+
+.review-answer {
+  font-size: 26rpx;
+  padding: 12rpx;
+  border-radius: 6rpx;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.review-answer.answer-correct {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.review-answer.answer-wrong {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.review-explanation {
+  font-size: 24rpx;
+  color: #666;
+  background-color: #f9f9f9;
+  padding: 12rpx;
+  border-radius: 6rpx;
+  display: block;
+  line-height: 1.6;
+}
+
+.review-answer .label,
+.review-explanation .label {
+  font-weight: 600;
+  margin-right: 8rpx;
 }

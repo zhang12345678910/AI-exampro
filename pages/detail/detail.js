@@ -92,9 +92,19 @@ Page({
   onShareAppMessage: function () {
     const term = this.data.term
     return {
-      title: `学习 AI 术语：${term.name}`,
+      title: `【AI 术语学习】${term.name} - ${term.definition.substring(0, 30)}...`,
       path: `/pages/detail/detail?id=${term.id}`,
       imageUrl: ''
     }
+  },
+
+  // 分享术语卡片到朋友圈
+  shareToMoments() {
+    // 小程序不支持直接分享到朋友圈，引导用户截图或使用官方分享
+    wx.showModal({
+      title: '分享提示',
+      content: '点击右上角「…」，选择「发送给朋友」或「分享到朋友圈」',
+      showCancel: false
+    })
   }
 })

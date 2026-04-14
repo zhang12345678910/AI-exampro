@@ -9,7 +9,10 @@ Page({
     quizStarted: false,
     quizFinished: false,
     score: 0,
-    totalQuestions: 10
+    totalQuestions: 10,
+    correctCount: 0,
+    showReview: false, // 是否显示答题回顾
+    reviewList: [] // 答题回顾列表
   },
 
   onLoad: function () {
@@ -98,33 +101,61 @@ Page({
   // 提交测验
   submitQuiz() {
     let correctCount = 0
+    const reviewList = []
+    
     this.data.questions.forEach((q, i) => {
-      if (this.data.userAnswers[i] === q.answer) {
+      const isCorrect = this.data.userAnswers[i] === q.answer
+      if (isCorrect) {
         correctCount++
       }
+      
+      // 生成回顾数据
+      reviewList.push({
+        question: q.question,
+        userAnswer: q.options[this.data.userAnswers[i]],
+        correctAnswer: q.options[q.answer],
+        isCorrect,
+        explanation: q.explanation || '暂无解析'
+      })
     })
 
     const score = Math.round((correctCount / this.data.questions.length) * 100)
     
     this.setData({
       quizFinished: true,
-      score
+      score,
+      correctCount,
+      reviewList
     })
 
     // 保存成绩
-    this.saveScore(score)
+    this.saveScore(score, correctCount)
   },
 
   // 保存成绩
-  async saveScore(score) {
+  async saveScore(score, correctCount) {
     try {
       await wx.cloud.callFunction({
         name: 'saveQuizScore',
-        data: { score, total: this.data.questions.length }
+        data: { 
+          score, 
+          total: this.data.questions.length,
+          correctCount 
+        }
       })
     } catch (err) {
       console.error('保存成绩失败:', err)
     }
+  },
+
+  // 查看答题回顾
+  showReviewPage() {
+    this.setData({ showReview: true })
+  },
+
+  // 隐藏回顾
+  hideReview() {
+    this.setData({ showReview: false })
   },
 
   // 重新开始
@@ -134,7 +165,9 @@ Page({
       userAnswers: [],
       quizStarted: true,
       quizFinished: false,
-      score: 0
+      score: 0,
+      showReview: false,
+      reviewList: []
     })
     this.startQuiz()
   },
@@ -142,5 +175,18 @@ Page({
   // 返回首页
   goHome() {
     wx.switchTab({ url: '/pages/index/index' })
+  },
+
+  // 分享
+  onShareAppMessage: function () {
+    const score = this.data.score
+    const correctCount = this.data.correctCount
+    const total = this.data.questions.length
+    
+    return {
+      title: `我在 AI 术语测验中得了 ${score} 分（${correctCount}/${total}），来挑战我吧！`,
+      path: '/pages/quiz/quiz',
+      imageUrl: ''
+    }
   }
 })

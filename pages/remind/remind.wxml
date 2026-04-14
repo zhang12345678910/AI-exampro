@@ -1,0 +1,54 @@
+<!--pages/remind/remind.wxml-->
+<view class="container">
+  <view class="card">
+    <view class="header">
+      <text class="icon">🔔</text>
+      <text class="title">复习提醒</text>
+    </view>
+
+    <view class="desc">
+      <text>每天定时提醒你复习 AI 术语，保持学习节奏</text>
+    </view>
+
+    <view wx:if="{{loading}}" class="loading">
+      <text>加载中...</text>
+    </view>
+
+    <view wx:else class="content">
+      <view wx:if="{{subscribed}}" class="subscribed-status">
+        <text class="status-icon">✅</text>
+        <text class="status-text">已订阅每日提醒</text>
+        <text class="status-time">提醒时间：{{remindTime}}</text>
+      </view>
+
+      <view wx:else class="subscribe-form">
+        <view class="form-item">
+          <text class="label">提醒时间</text>
+          <picker mode="time" value="{{remindTime}}" bindchange="onTimeChange">
+            <view class="picker">
+              {{remindTime}}
+              <text class="arrow">▶</text>
+            </view>
+          </picker>
+        </view>
+
+        <button class="btn-subscribe" bindtap="subscribeRemind">
+          订阅提醒
+        </button>
+      </view>
+
+      <view wx:if="{{subscribed}}" class="action-btns">
+        <button class="btn-cancel" bindtap="unsubscribeRemind">
+          取消订阅
+        </button>
+      </view>
+    </view>
+
+    <view class="tips">
+      <text class="tips-title">💡 温馨提示</text>
+      <text class="tips-text">• 订阅后每天会在指定时间收到复习提醒</text>
+      <text class="tips-text">• 可以随时取消或修改提醒时间</text>
+      <text class="tips-text">• 建议设置为晚上学习时间</text>
+    </view>
+  </view>
+</view>
