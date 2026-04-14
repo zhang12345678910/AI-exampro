@@ -117,7 +117,7 @@ Page({
   // 分享
   onShareAppMessage: function () {
     return {
-      title: '我在 AI 术语通学习，一起来挑战！',
+      title: '我在 AI 词星球学习，一起来挑战！',
       path: '/pages/index/index'
     }
   }

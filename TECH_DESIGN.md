@@ -1,4 +1,4 @@
-# AI 术语通小程序 - 技术设计方案
+# AI 词星球小程序 - 技术设计方案
 
 **版本**: 1.0  
 **日期**: 2026-04-13  
@@ -228,7 +228,7 @@ export function submitQuiz(answers) {}
   ],
   "window": {
     "navigationBarBackgroundColor": "#07c160",
-    "navigationBarTitleText": "AI 术语通",
+    "navigationBarTitleText": "AI 词星球",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#f5f5f5"
   },

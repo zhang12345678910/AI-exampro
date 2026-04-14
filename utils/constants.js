@@ -55,7 +55,7 @@ export const STORAGE = {
 
 // 分享配置
 export const SHARE_CONFIG = {
-  TITLE: 'AI 术语通 - 每天学习一个 AI 术语',
+  TITLE: 'AI 词星球 - 每天学习一个 AI 术语',
   DESC: '通俗易懂的 AI 学习小程序，快来一起挑战！',
   PATH: '/pages/index/index'
 }
