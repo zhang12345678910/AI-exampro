@@ -5,7 +5,7 @@ App({
       console.error('请使用 2.2.3 或以上版本，以支持小程序云开发')
     } else {
       wx.cloud.init({
-        env: 'ai-terms-env', // 云环境 ID，需替换为实际的
+        env: 'cloud1-2g1k2at039348d5d', // 云环境 ID
         traceUser: true
       })
     }
