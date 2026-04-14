@@ -4,35 +4,54 @@
     "pages/detail/detail",
     "pages/quiz/quiz",
     "pages/collection/collection",
-    "pages/remind/remind"
+    "pages/remind/remind",
+    "pages/dictionary/list",
+    "pages/dictionary/detail",
+    "pages/learning/level",
+    "pages/learning/detail",
+    "pages/learning/quiz",
+    "pages/learning/checkin",
+    "pages/profile/index",
+    "pages/profile/collection",
+    "pages/profile/unknown",
+    "pages/profile/notes",
+    "pages/profile/stats",
+    "pages/profile/badges",
+    "pages/profile/settings"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#07c160",
+    "navigationBarBackgroundColor": "#1E88E5",
     "navigationBarTitleText": "AI 词星球",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#f5f5f5"
+    "backgroundColor": "#F5F7FA"
   },
   "tabBar": {
     "color": "#999",
-    "selectedColor": "#07c160",
+    "selectedColor": "#1E88E5",
     "list": [
       {
         "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/dictionary/list",
+        "text": "词典",
+        "iconPath": "images/dictionary.png",
+        "selectedIconPath": "images/dictionary-active.png"
+      },
+      {
+        "pagePath": "pages/learning/level",
         "text": "学习",
         "iconPath": "images/learn.png",
         "selectedIconPath": "images/learn-active.png"
       },
       {
-        "pagePath": "pages/quiz/quiz",
-        "text": "测验",
-        "iconPath": "images/quiz.png",
-        "selectedIconPath": "images/quiz-active.png"
-      },
-      {
-        "pagePath": "pages/collection/collection",
-        "text": "收藏",
-        "iconPath": "images/collection.png",
-        "selectedIconPath": "images/collection-active.png"
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile-active.png"
       }
     ]
   },

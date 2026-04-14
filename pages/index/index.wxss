@@ -1,152 +1,318 @@
 /* pages/index/index.wxss */
 .container {
-  padding: 0;
+  padding: 24rpx;
+  background-color: #F5F7FA;
+  min-height: 100vh;
 }
 
-/* 分类滚动条 */
-.category-scroll {
-  white-space: nowrap;
-  background-color: #fff;
-  padding: 20rpx;
-  border-bottom: 1rpx solid #eee;
+/* 搜索框样式 */
+.search-box {
+  position: relative;
+  margin-bottom: 32rpx;
 }
 
-.category-list {
-  display: inline-flex;
-}
-
-.category-item {
-  display: inline-block;
-  padding: 12rpx 24rpx;
-  margin-right: 16rpx;
-  background-color: #f5f5f5;
-  border-radius: 30rpx;
-  font-size: 26rpx;
-  color: #666;
-}
-
-.category-item.active {
-  background-color: #07c160;
-  color: #fff;
-}
-
-/* 加载状态 */
-.loading, .empty {
+.search-input-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 400rpx;
-  color: #999;
+  background-color: #FFFFFF;
+  border-radius: 32rpx;
+  padding: 20rpx 32rpx;
+  box-shadow: 0 2px 8rpx rgba(0, 0, 0, 0.08);
+}
+
+.search-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+}
+
+.search-input {
+  flex: 1;
   font-size: 28rpx;
+  color: #333333;
 }
 
-/* 术语列表 */
-.term-list {
-  padding: 20rpx;
+.clear-icon {
+  width: 28rpx;
+  height: 28rpx;
+  padding: 8rpx;
 }
 
-.term-card {
-  margin-bottom: 20rpx;
-}
-
-.term-header {
-  margin-bottom: 16rpx;
-}
-
-.term-name {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #333;
-  display: block;
-}
-
-.term-name-en {
-  font-size: 24rpx;
-  color: #999;
-  margin-top: 8rpx;
-  display: block;
-}
-
-.term-preview {
-  font-size: 28rpx;
-  color: #666;
-  margin-bottom: 16rpx;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+/* 搜索建议 */
+.suggestions-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 4px 16rpx rgba(0, 0, 0, 0.12);
+  z-index: 100;
   overflow: hidden;
 }
 
-.term-footer {
+.suggestion-item {
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid #F5F7FA;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-name {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.suggestion-en {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* 搜索历史 */
+.history-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 4px 16rpx rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  padding: 24rpx;
+}
+
+.history-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16rpx;
 }
 
-.term-tags {
-  flex: 1;
+.history-title {
+  font-size: 26rpx;
+  color: #999999;
 }
 
-.difficulty {
+.clear-history {
   font-size: 24rpx;
-  color: #999;
+  color: #1E88E5;
 }
 
-.term-actions {
-  border-top: 1rpx solid #f0f0f0;
-  padding-top: 16rpx;
-}
-
-.btn-learn {
-  background-color: #07c160;
-  color: #fff;
-  border: none;
-  border-radius: 6rpx;
-  font-size: 24rpx;
-  padding: 12rpx 24rpx;
-}
-
-.btn-learned {
-  background-color: #999;
-  color: #fff;
-}
-
-.btn-collect {
-  background-color: #fff;
-  color: #ff9800;
-  border: 2rpx solid #ff9800;
-  margin-left: 12rpx;
-}
-
-.btn-collected {
-  background-color: #fff3e0;
-  color: #ff9800;
-  border: 2rpx solid #ff9800;
-  margin-left: 12rpx;
-}
-
-/* 状态标记 */
-.term-status {
+.history-list {
   display: flex;
-  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  background-color: #F5F7FA;
+  border-radius: 24rpx;
+  padding: 12rpx 24rpx;
+  margin-right: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.history-item text {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.delete-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 12rpx;
+}
+
+/* 每日一词卡片 */
+.daily-word-card {
+  background: linear-gradient(135deg, #1E88E5 0%, #42A5F5 100%);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 8rpx 24rpx rgba(30, 136, 229, 0.3);
+}
+
+.daily-word-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.daily-word-label {
+  font-size: 28rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.daily-word-date {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.daily-word-content {
+  margin-bottom: 32rpx;
+}
+
+.daily-word-name {
+  display: block;
+  font-size: 40rpx;
+  color: #FFFFFF;
+  font-weight: bold;
   margin-bottom: 12rpx;
 }
 
-.status-badge {
+.daily-word-en {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20rpx;
+}
+
+.daily-word-definition {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+}
+
+.daily-word-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 32rpx;
+  border: none;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.checkin-btn {
+  background-color: #FF9800;
+}
+
+.checked-btn {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 分类入口 */
+.categories-section {
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: bold;
+  margin-bottom: 24rpx;
+}
+
+.categories-scroll {
+  white-space: nowrap;
+}
+
+.category-item {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  padding: 6rpx 12rpx;
-  border-radius: 6rpx;
+  width: 140rpx;
+  margin-right: 24rpx;
+}
+
+.category-icon {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+}
+
+.category-name {
+  font-size: 26rpx;
+  color: #333333;
+  margin-bottom: 8rpx;
+}
+
+.category-desc {
   font-size: 22rpx;
+  color: #999999;
 }
 
-.status-badge.learned {
-  background-color: #e8f5e9;
-  color: #07c160;
+/* 热门名词 */
+.hot-terms-section {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
 }
 
-.status-badge.collected {
-  background-color: #fff3e0;
-  color: #ff9800;
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.section-more {
+  font-size: 24rpx;
+  color: #1E88E5;
+}
+
+.hot-terms-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.hot-term-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F5F7FA;
+}
+
+.hot-term-item:last-child {
+  border-bottom: none;
+}
+
+.hot-term-name {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.hot-term-tag {
+  font-size: 22rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 16rpx;
+  background-color: #E3F2FD;
+  color: #1E88E5;
+}
+
+.hot-term-tag.tag-1 {
+  background-color: #E8F5E9;
+  color: #4CAF50;
+}
+
+.hot-term-tag.tag-2 {
+  background-color: #FFF3E0;
+  color: #FF9800;
+}
+
+.hot-term-tag.tag-3 {
+  background-color: #F3E5F5;
+  color: #7E57C2;
 }

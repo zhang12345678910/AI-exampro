@@ -1,79 +1,132 @@
 <!--pages/index/index.wxml-->
 <view class="container">
-  <!-- 分类选择 -->
-  <scroll-view class="category-scroll" scroll-x enable-flex>
-    <view class="category-list">
+  <!-- 搜索框 -->
+  <view class="search-box">
+    <view class="search-input-wrapper">
+      <image class="search-icon" src="/images/search.png" mode="aspectFit"></image>
+      <input 
+        class="search-input" 
+        placeholder="搜索 AI 名词（支持关键词/拼音）" 
+        value="{{searchValue}}"
+        bindinput="onSearchInput"
+        bindfocus="onSearchFocus"
+        bindblur="onSearchBlur"
+        confirm-type="search"
+        bindconfirm="onSearch"
+      />
+      <image 
+        class="clear-icon" 
+        src="/images/clear.png" 
+        mode="aspectFit"
+        wx:if="{{searchValue}}"
+        bindtap="onClearSearch"
+      ></image>
+    </view>
+    
+    <!-- 搜索建议 -->
+    <view class="suggestions-box" wx:if="{{showSuggestions && searchSuggestions.length > 0}}">
       <view 
-        class="category-item {{category === 'all' ? 'active' : ''}}" 
-        data-category="all"
-        bindtap="onCategoryChange">全部</view>
+        class="suggestion-item" 
+        wx:for="{{searchSuggestions}}" 
+        wx:key="_id"
+        data-id="{{item._id}}"
+        data-name="{{item.name}}"
+        bindtap="onSuggestionTap"
+      >
+        <text class="suggestion-name">{{item.name}}</text>
+        <text class="suggestion-en">{{item.nameEn}}</text>
+      </view>
+    </view>
+    
+    <!-- 搜索历史 -->
+    <view class="history-box" wx:if="{{!searchValue && searchHistory.length > 0 && showSuggestions}}">
+      <view class="history-header">
+        <text class="history-title">搜索历史</text>
+        <text class="clear-history" bindtap="clearSearchHistory">清空</text>
+      </view>
+      <view class="history-list">
+        <view 
+          class="history-item" 
+          wx:for="{{searchHistory}}" 
+          wx:key="*this"
+          data-index="{{index}}"
+          bindtap="onHistoryTap"
+        >
+          <text>{{item}}</text>
+          <image 
+            class="delete-icon" 
+            src="/images/delete.png" 
+            mode="aspectFit"
+            catchtap="deleteSearchItem"
+          ></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 每日一词卡片 -->
+  <view class="daily-word-card" wx:if="{{dailyWord}}" bindtap="onDailyWordTap">
+    <view class="daily-word-header">
+      <text class="daily-word-label">📅 每日一词</text>
+      <text class="daily-word-date">{{dailyWordDate}}</text>
+    </view>
+    <view class="daily-word-content">
+      <text class="daily-word-name">{{dailyWord.name}}</text>
+      <text class="daily-word-en">{{dailyWord.nameEn}}</text>
+      <text class="daily-word-definition">{{dailyWord.definition.simple}}</text>
+    </view>
+    <view class="daily-word-actions">
+      <button 
+        class="action-btn checkin-btn" 
+        wx:if="{{!isCheckInToday}}"
+        bindtap="onCheckIn"
+      >打卡</button>
+      <button 
+        class="action-btn checked-btn" 
+        wx:else
+        disabled
+      >今日已打卡</button>
+      <button class="action-btn" bindtap="onCollectDailyWord">收藏</button>
+      <button class="action-btn" bindtap="onShareDailyWord">分享</button>
+    </view>
+  </view>
+
+  <!-- 分类入口 -->
+  <view class="categories-section">
+    <text class="section-title">分类浏览</text>
+    <scroll-view class="categories-scroll" scroll-x enable-flex>
       <view 
-        class="category-item {{category === item ? 'active' : ''}}" 
+        class="category-item" 
         wx:for="{{categories}}" 
-        wx:key="*this"
-        data-category="{{item}}"
-        bindtap="onCategoryChange">{{item}}</view>
-    </view>
-  </scroll-view>
-
-  <!-- 术语列表 -->
-  <view wx:if="{{loading}}" class="loading">
-    <text>加载中...</text>
+        wx:key="id"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+        bindtap="onCategoryTap"
+      >
+        <text class="category-icon">{{item.icon}}</text>
+        <text class="category-name">{{item.name}}</text>
+        <text class="category-desc">{{item.desc}}</text>
+      </view>
+    </scroll-view>
   </view>
 
-  <view wx:else class="term-list">
-    <view 
-      class="term-card card" 
-      wx:for="{{terms}}" 
-      wx:key="id"
-      data-id="{{item.id}}"
-      bindtap="onTermTap">
-      
-      <view class="term-header">
-        <text class="term-name">{{item.name}}</text>
-        <text class="term-name-en">{{item.nameEn}}</text>
-      </view>
-
-      <view class="term-preview">
-        <text>{{item.definition}}</text>
-      </view>
-
-      <view class="term-footer">
-        <view class="term-tags">
-          <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
-        </view>
-        <text class="difficulty difficulty-{{item.difficulty}}">
-          难度：{{item.difficulty === 1 ? '★☆☆' : item.difficulty === 2 ? '★★☆' : '★★★'}}
-        </text>
-      </view>
-
-      <!-- 状态标记 -->
-      <view class="term-status">
-        <view class="status-badge learned" wx:if="{{learnedTermIds.includes(item.id)}}">
-          <text>✓ 已学</text>
-        </view>
-        <view class="status-badge collected" wx:if="{{collectedTermIds.includes(item.id)}}">
-          <text>⭐ 收藏</text>
-        </view>
-      </view>
-
-      <view class="term-actions">
-        <button 
-          class="btn-learn {{learnedTermIds.includes(item.id) ? 'btn-learned' : ''}}" 
-          size="mini" 
-          data-id="{{item.id}}"
-          bindtap="markLearned">{{learnedTermIds.includes(item.id) ? '已学' : '标记已学'}}</button>
-        <button 
-          class="btn-collect {{collectedTermIds.includes(item.id) ? 'btn-collected' : ''}}" 
-          size="mini" 
-          data-id="{{item.id}}"
-          bindtap="toggleCollect">{{collectedTermIds.includes(item.id) ? '⭐ 已收藏' : '☆ 收藏'}}</button>
+  <!-- 热门名词推荐 -->
+  <view class="hot-terms-section">
+    <view class="section-header">
+      <text class="section-title">🔥 热门名词</text>
+      <text class="section-more">查看全部 ></text>
+    </view>
+    <view class="hot-terms-list">
+      <view 
+        class="hot-term-item" 
+        wx:for="{{hotTerms}}" 
+        wx:key="_id"
+        data-id="{{item._id}}"
+        bindtap="onHotTermTap"
+      >
+        <text class="hot-term-name">{{item.name}}</text>
+        <text class="hot-term-tag tag-{{item.difficulty}}">{{item.difficultyText}}</text>
       </view>
     </view>
-  </view>
-
-  <!-- 空状态 -->
-  <view wx:if="{{!loading && terms.length === 0}}" class="empty">
-    <text>暂无数据</text>
   </view>
 </view>
