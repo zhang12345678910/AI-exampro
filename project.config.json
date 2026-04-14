@@ -47,6 +47,9 @@
   "appid": "wxXXXXXXXXXXXXXXXX",
   "projectname": "ai-terms-miniprogram",
   "cloudfunctionRoot": "cloud/",
+  "cloud": {
+    "env": "cloud1-2g1k2at039348d5d"
+  },
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
