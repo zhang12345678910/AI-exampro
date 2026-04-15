@@ -1,0 +1,59 @@
+<!--pages/profile/collection/index.wxml - 收藏夹页 (宇宙星空主题)-->
+<view class="container">
+  <!-- 宇宙背景 -->
+  <view class="cosmic-bg"></view>
+  
+  <!-- 头部 -->
+  <view class="header">
+    <text class="page-title">📚 收藏夹</text>
+    <text class="page-subtitle">已收藏 {{collectedTerms.length}} 个术语</text>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-section">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input 
+        class="search-input" 
+        placeholder="搜索收藏的术语..." 
+        value="{{searchValue}}"
+        bindinput="onSearchInput"
+      />
+      <text class="clear-btn" wx:if="{{searchValue}}" bindtap="clearSearch">×</text>
+    </view>
+  </view>
+
+  <!-- 术语列表 -->
+  <scroll-view class="terms-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view 
+      class="term-card glass-card"
+      wx:for="{{filteredTerms}}"
+      wx:key="_id"
+      data-id="{{item._id}}"
+      bindtap="goToDetail"
+    >
+      <view class="term-header">
+        <text class="term-name">{{item.name}}</text>
+        <view class="difficulty-tag" wx:if="{{item.difficulty === 1}}">入门</view>
+        <view class="difficulty-tag" wx:if="{{item.difficulty === 2}}">进阶</view>
+        <view class="difficulty-tag" wx:if="{{item.difficulty === 3}}">专业</view>
+      </view>
+      <text class="term-definition">{{item.definition ? (item.definition.simple || item.definition) : ''}}</text>
+      <view class="term-footer">
+        <text class="term-category">{{item.category}}</text>
+        <view class="action-btn" catchtap="removeCollection" data-id="{{item._id}}">
+          <text class="action-icon">❌</text>
+          <text class="action-text">移除</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{filteredTerms.length === 0}}">
+      <text class="empty-icon">📚</text>
+      <text class="empty-text">{{searchValue ? '没有找到相关收藏' : '暂无收藏'}}</text>
+      <text class="empty-hint" wx:if="{{!searchValue}}">去词典中收藏喜欢的术语吧</text>
+      <view class="empty-btn" wx:if="{{!searchValue}}" bindtap="goToDictionary">去浏览</view>
+    </view>
+  </scroll-view>
+</view>

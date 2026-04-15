@@ -1,17 +1,19 @@
-// pages/index/index.js
+// pages/index/index.js - 首页逻辑 (宇宙星空主题)
 const app = getApp();
 
 Page({
   data: {
+    // 当前 Tab
+    currentTab: 'home',
+    
     // 搜索相关
     searchValue: '',
     searchHistory: [],
-    searchSuggestions: [],
-    showSuggestions: false,
     
     // 每日一词
     dailyWord: null,
     isCheckInToday: false,
+    isCollected: false,
     
     // 分类入口
     categories: [
@@ -24,13 +26,20 @@ Page({
     ],
     
     // 热门名词
-    hotTerms: []
+    hotTerms: [],
+    
+    // 加载状态
+    loading: false,
+    
+    // 星星动画数据
+    stars: []
   },
 
   onLoad: function () {
+    this.generateStars();
     this.loadDailyWord();
-    this.loadSearchHistory();
     this.loadHotTerms();
+    this.loadSearchHistory();
   },
 
   onShow: function () {
@@ -43,196 +52,168 @@ Page({
     wx.stopPullDownRefresh();
   },
 
+  // 生成星星动画数据
+  generateStars() {
+    const stars = [];
+    const count = 20; // 优化性能，减少到 20 个
+    
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        delay: Math.random() * 3
+      });
+    }
+    
+    this.setData({ stars });
+  },
+
   // 加载每日一词
   async loadDailyWord() {
+    this.setData({ loading: true });
+    
     try {
-      const today = new Date().toISOString().split('T')[0];
+      // 云函数调用
       const res = await wx.cloud.callFunction({
         name: 'getDailyWord',
-        data: { date: today }
+        data: {}
       });
       
       if (res.result && res.result.success) {
-        this.setData({ dailyWord: res.result.term });
+        this.setData({
+          dailyWord: res.result.data,
+          loading: false
+        });
       }
-    } catch (error) {
-      console.error('加载每日一词失败:', error);
-      // 降级：从本地数据获取
-      this.loadDailyWordFromLocal();
-    }
-  },
-
-  loadDailyWordFromLocal() {
-    const terms = require('../../data/terms.json');
-    const today = new Date().getDate();
-    const termIndex = today % terms.length;
-    this.setData({ dailyWord: terms[termIndex] });
-  },
-
-  // 检查今日是否已打卡
-  async checkTodayCheckIn() {
-    try {
-      const user = app.globalData.userInfo;
-      if (!user) return;
+    } catch (err) {
+      console.error('加载每日一词失败:', err);
       
-      const today = new Date().toISOString().split('T')[0];
-      const checkInCalendar = user.checkInCalendar || {};
-      
-      this.setData({ isCheckInToday: !!checkInCalendar[today] });
-    } catch (error) {
-      console.error('检查打卡状态失败:', error);
+      // 降级：使用本地数据
+      try {
+        const terms = require('../../data/terms.json');
+        if (terms && terms.length > 0) {
+          this.setData({
+            dailyWord: terms[0],
+            loading: false
+          });
+        }
+      } catch (localErr) {
+        this.setData({ loading: false });
+      }
     }
-  },
-
-  // 加载搜索历史
-  loadSearchHistory() {
-    const history = wx.getStorageSync('searchHistory') || [];
-    this.setData({ searchHistory: history.slice(0, 10) });
   },
 
   // 加载热门名词
   async loadHotTerms() {
     try {
-      const db = wx.cloud.database();
-      const res = await db.collection('terms')
-        .orderBy('viewCount', 'desc')
-        .limit(10)
-        .get();
-      
-      this.setData({ hotTerms: res.data });
-    } catch (error) {
-      console.error('加载热门名词失败:', error);
-      // 降级：从本地数据获取
-      const terms = require('../../data/terms.json');
-      this.setData({ hotTerms: terms.slice(0, 10) });
-    }
-  },
-
-  // 搜索框输入事件
-  onSearchInput: function (e) {
-    const value = e.detail.value;
-    this.setData({ searchValue: value });
-    
-    if (value.length >= 1) {
-      this.loadSuggestions(value);
-    } else {
-      this.setData({ searchSuggestions: [], showSuggestions: false });
-    }
-  },
-
-  // 加载搜索建议
-  async loadSuggestions(keyword) {
-    try {
-      const db = wx.cloud.database();
-      const res = await db.collection('terms')
-        .where({
-          name: db.RegExp({
-            regexp: `^${keyword}`,
-            options: 'i'
-          })
-        })
-        .limit(5)
-        .get();
-      
-      this.setData({ 
-        searchSuggestions: res.data,
-        showSuggestions: true
-      });
-    } catch (error) {
-      console.error('加载搜索建议失败:', error);
-    }
-  },
-
-  // 点击搜索框
-  onSearchFocus: function () {
-    this.setData({ showSuggestions: true });
-  },
-
-  // 搜索框失去焦点
-  onSearchBlur: function () {
-    setTimeout(() => {
-      this.setData({ showSuggestions: false });
-    }, 200);
-  },
-
-  // 执行搜索
-  onSearch: function () {
-    const keyword = this.data.searchValue.trim();
-    if (!keyword) return;
-    
-    // 添加到搜索历史
-    this.addToSearchHistory(keyword);
-    
-    // 跳转到词典页
-    wx.navigateTo({
-      url: `/pages/dictionary/list?keyword=${encodeURIComponent(keyword)}`
-    });
-  },
-
-  // 添加到搜索历史
-  addToSearchHistory: function (keyword) {
-    let history = this.data.searchHistory;
-    
-    // 移除已存在的
-    history = history.filter(item => item !== keyword);
-    
-    // 添加到开头
-    history.unshift(keyword);
-    
-    // 限制最多 10 条
-    if (history.length > 10) {
-      history = history.slice(0, 10);
-    }
-    
-    this.setData({ searchHistory: history });
-    wx.setStorageSync('searchHistory', history);
-  },
-
-  // 清空搜索历史
-  clearSearchHistory: function () {
-    wx.showModal({
-      title: '提示',
-      content: '确定清空搜索历史吗？',
-      success: (res) => {
-        if (res.confirm) {
-          this.setData({ searchHistory: [] });
-          wx.removeStorageSync('searchHistory');
+      const res = await wx.cloud.callFunction({
+        name: 'getTermList',
+        data: {
+          page: 1,
+          pageSize: 10,
+          orderBy: 'viewCount',
+          order: 'desc'
         }
+      });
+      
+      if (res.result && res.result.success) {
+        this.setData({ hotTerms: res.result.data });
       }
-    });
+    } catch (err) {
+      console.error('加载热门名词失败:', err);
+      
+      // 降级：使用本地数据
+      try {
+        const terms = require('../../data/terms.json');
+        const sorted = terms.sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0));
+        this.setData({ hotTerms: sorted.slice(0, 10) });
+      } catch (localErr) {
+        console.error('本地加载失败:', localErr);
+      }
+    }
   },
 
-  // 删除单条搜索历史
-  deleteSearchItem: function (e) {
-    const index = e.currentTarget.dataset.index;
-    let history = this.data.searchHistory;
-    history.splice(index, 1);
-    this.setData({ searchHistory: history });
-    wx.setStorageSync('searchHistory', history);
+  // 加载搜索历史
+  loadSearchHistory() {
+    try {
+      const history = wx.getStorageSync('searchHistory') || [];
+      this.setData({ searchHistory: history.slice(0, 10) });
+    } catch (err) {
+      console.error('加载搜索历史失败:', err);
+    }
   },
 
-  // 点击搜索建议
-  onSuggestionTap: function (e) {
-    const termId = e.currentTarget.dataset.id;
-    const termName = e.currentTarget.dataset.name;
-    
-    this.addToSearchHistory(termName);
-    wx.navigateTo({
-      url: `/pages/dictionary/detail?id=${termId}`
-    });
+  // 检查今日打卡
+  checkTodayCheckIn() {
+    try {
+      const checkInCalendar = wx.getStorageSync('checkInCalendar') || {};
+      const today = new Date().toISOString().split('T')[0];
+      this.setData({ isCheckInToday: !!checkInCalendar[today] });
+    } catch (err) {
+      console.error('检查打卡失败:', err);
+    }
   },
 
-  // 点击每日一词卡片
-  onDailyWordTap: function () {
-    if (this.data.dailyWord && this.data.dailyWord._id) {
+  // 搜索输入
+  onSearchInput(e) {
+    this.setData({ searchValue: e.detail.value });
+  },
+
+  // 搜索确认
+  onSearchConfirm(e) {
+    const value = e.detail.value.trim();
+    if (value) {
+      this.saveSearchHistory(value);
       wx.navigateTo({
-        url: `/pages/dictionary/detail?id=${this.data.dailyWord._id}`
+        url: `/pages/dictionary/list/index?search=${encodeURIComponent(value)}`
       });
     }
   },
 
-  // 打卡
-  onCheckIn: async function () {
+  // 清除搜索
+  clearSearch() {
+    this.setData({ searchValue: '' });
+  },
+
+  // 保存搜索历史
+  saveSearchHistory(keyword) {
+    try {
+      let history = wx.getStorageSync('searchHistory') || [];
+      
+      // 移除已存在的
+      history = history.filter(k => k !== keyword);
+      
+      // 添加到开头
+      history.unshift(keyword);
+      
+      // 只保留最近 10 条
+      history = history.slice(0, 10);
+      
+      wx.setStorageSync('searchHistory', history);
+      this.setData({ searchHistory: history });
+    } catch (err) {
+      console.error('保存搜索历史失败:', err);
+    }
+  },
+
+  // 选择分类
+  selectCategory(e) {
+    const categoryId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/dictionary/list/index?category=${categoryId}`
+    });
+  },
+
+  // 跳转详情
+  goToDetail(e) {
+    const termId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/dictionary/detail/index?id=${termId}`
+    });
+  },
+
+  // 切换打卡
+  async toggleCheckIn() {
     if (this.data.isCheckInToday) {
       wx.showToast({ title: '今日已打卡', icon: 'none' });
       return;
@@ -241,70 +222,105 @@ Page({
     try {
       const res = await wx.cloud.callFunction({
         name: 'checkIn',
-        data: { date: new Date().toISOString().split('T')[0] }
+        data: {}
       });
       
       if (res.result && res.result.success) {
         this.setData({ isCheckInToday: true });
         
-        wx.showModal({
-          title: '打卡成功',
-          content: `连续打卡 ${res.result.continuousDays} 天`,
-          showCancel: false,
-          confirmText: '分享'
+        // 更新本地存储
+        const checkInCalendar = wx.getStorageSync('checkInCalendar') || {};
+        const today = new Date().toISOString().split('T')[0];
+        checkInCalendar[today] = true;
+        wx.setStorageSync('checkInCalendar', checkInCalendar);
+        
+        wx.showToast({ 
+          title: res.result.message || '打卡成功', 
+          icon: 'success' 
         });
       }
-    } catch (error) {
-      console.error('打卡失败:', error);
-      wx.showToast({ title: '打卡失败，请重试', icon: 'none' });
+    } catch (err) {
+      console.error('打卡失败:', err);
+      wx.showToast({ title: '打卡失败', icon: 'none' });
     }
   },
 
-  // 收藏每日一词
-  onCollectDailyWord: async function () {
-    if (!this.data.dailyWord || !this.data.dailyWord._id) return;
+  // 切换收藏
+  async toggleCollection() {
+    const termId = this.data.dailyWord._id;
+    const isCollected = this.data.isCollected;
     
     try {
-      await app.toggleCollect(this.data.dailyWord._id);
-      wx.showToast({ title: '收藏成功', icon: 'success' });
-    } catch (error) {
-      wx.showToast({ title: '收藏失败', icon: 'none' });
+      let collectedTerms = wx.getStorageSync('collectedTerms') || [];
+      
+      if (isCollected) {
+        // 取消收藏
+        collectedTerms = collectedTerms.filter(id => id !== termId);
+        wx.showToast({ title: '已取消收藏', icon: 'none' });
+      } else {
+        // 添加收藏
+        collectedTerms.push(termId);
+        wx.showToast({ title: '收藏成功', icon: 'success' });
+      }
+      
+      this.setData({ isCollected: !isCollected });
+      wx.setStorageSync('collectedTerms', collectedTerms);
+    } catch (err) {
+      console.error('切换收藏失败:', err);
+      wx.showToast({ title: '操作失败', icon: 'none' });
     }
   },
 
   // 分享每日一词
-  onShareDailyWord: function () {
-    if (!this.data.dailyWord) return;
-    
+  shareDailyWord() {
     wx.showShareMenu({
       withShareTicket: true,
       menus: ['shareAppMessage', 'shareTimeline']
     });
   },
 
-  // 点击分类入口
-  onCategoryTap: function (e) {
-    const categoryId = e.currentTarget.dataset.id;
-    const categoryName = e.currentTarget.dataset.name;
+  // 切换 Tab
+  switchTab(e) {
+    const tab = e.currentTarget.dataset.tab;
     
-    wx.navigateTo({
-      url: `/pages/dictionary/list?category=${categoryId}&categoryName=${encodeURIComponent(categoryName)}`
-    });
+    if (tab === this.data.currentTab) {
+      return;
+    }
+    
+    this.setData({ currentTab: tab });
+    
+    // 跳转页面
+    const pages = {
+      home: '/pages/index/index',
+      dictionary: '/pages/dictionary/list/index',
+      learning: '/pages/learning/level/index',
+      profile: '/pages/profile/index'
+    };
+    
+    if (pages[tab]) {
+      wx.switchTab({
+        url: pages[tab]
+      });
+    }
   },
 
-  // 点击热门名词
-  onHotTermTap: function (e) {
-    const termId = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: `/pages/dictionary/detail?id=${termId}`
-    });
-  },
-
-  // 分享
-  onShareAppMessage: function () {
+  // 页面分享
+  onShareAppMessage() {
+    const term = this.data.dailyWord;
     return {
-      title: 'AI 词星球 - 每日一词',
-      path: '/pages/index/index',
+      title: term ? `AI 词星球 - 今日术语：${term.name}` : 'AI 词星球 - 探索 AI 知识宇宙',
+      path: term ? `/pages/dictionary/detail/index?id=${term._id}` : '/pages/index/index',
+      imageUrl: '',
+      withShareTicket: true
+    };
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    const term = this.data.dailyWord;
+    return {
+      title: term ? `今日 AI 术语：${term.name}` : 'AI 词星球',
+      query: term ? `id=${term._id}` : '',
       imageUrl: ''
     };
   }

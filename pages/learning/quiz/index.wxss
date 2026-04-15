@@ -1,0 +1,322 @@
+/* pages/learning/quiz/index.wxss - 测验页 (宇宙星空主题) */
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 160rpx;
+}
+
+/* 测验头部 */
+.quiz-header {
+  padding: 96rpx 32rpx 24rpx;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.progress-text {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.score-text {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #00d9ff;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 12rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d9ff 0%, #b794f6 100%);
+  border-radius: 6rpx;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 16rpx rgba(0, 217, 255, 0.5);
+}
+
+/* 测验内容 */
+.quiz-content {
+  padding: 0 32rpx;
+}
+
+.question-card {
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.question-type {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+}
+
+.type-tag {
+  padding: 6rpx 16rpx;
+  background: rgba(0, 217, 255, 0.15);
+  border-radius: 16rpx;
+  font-size: 22rpx;
+  color: #00d9ff;
+  font-weight: 600;
+}
+
+.difficulty-tag {
+  padding: 6rpx 16rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.question-text {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+  margin-bottom: 32rpx;
+}
+
+/* 选项列表 */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 24rpx;
+  transition: all 0.3s ease;
+}
+
+.option-item:active {
+  transform: scale(0.98);
+}
+
+.option-item.selected {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: rgba(0, 217, 255, 0.5);
+}
+
+.option-item.correct {
+  background: rgba(76, 175, 80, 0.15);
+  border-color: rgba(76, 175, 80, 0.5);
+}
+
+.option-item.wrong {
+  background: rgba(244, 67, 54, 0.15);
+  border-color: rgba(244, 67, 54, 0.5);
+}
+
+.option-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48rpx;
+  height: 48rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+}
+
+.option-item.selected .option-letter {
+  background: #00d9ff;
+  color: white;
+}
+
+.option-item.correct .option-letter {
+  background: #4CAF50;
+  color: white;
+}
+
+.option-item.wrong .option-letter {
+  background: #F44336;
+  color: white;
+}
+
+.option-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+.option-icon {
+  font-size: 32rpx;
+  flex-shrink: 0;
+}
+
+/* 判断题选项 */
+.true-false-options {
+  display: flex;
+  gap: 24rpx;
+}
+
+.tf-option {
+  flex: 1;
+  padding: 24rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.tf-option:active {
+  transform: scale(0.98);
+}
+
+.tf-option.selected {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: rgba(0, 217, 255, 0.5);
+  color: #00d9ff;
+}
+
+/* 操作按钮 */
+.quiz-actions {
+  padding: 32rpx;
+}
+
+.action-btn {
+  padding: 28rpx 0;
+  background: linear-gradient(135deg, #00d9ff 0%, #b794f6 100%);
+  border-radius: 32rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 8rpx 32rpx rgba(0, 217, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 16rpx rgba(0, 217, 255, 0.2);
+}
+
+.action-btn.disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  box-shadow: none;
+}
+
+/* 测验结果 */
+.result-section {
+  margin: 96rpx 32rpx 32rpx;
+  padding: 48rpx 32rpx;
+  text-align: center;
+}
+
+.result-header {
+  margin-bottom: 48rpx;
+}
+
+.result-emoji {
+  display: block;
+  font-size: 100rpx;
+  margin-bottom: 24rpx;
+}
+
+.result-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.result-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 48rpx;
+  padding: 32rpx 0;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.result-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #00d9ff;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.result-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.review-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: none;
+}
+
+.retry-btn {
+  flex: 1;
+}
+
+/* 空状态 */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  opacity: 0.5;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 28rpx;
+}
+
+.empty-btn {
+  margin-top: 32rpx;
+  padding: 16rpx 48rpx;
+  background: rgba(0, 217, 255, 0.15);
+  border: 1rpx solid rgba(0, 217, 255, 0.3);
+  border-radius: 24rpx;
+  color: #00d9ff;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.empty-btn:active {
+  background: rgba(0, 217, 255, 0.2);
+}

@@ -1,0 +1,42 @@
+<!--pages/profile/notes/index.wxml - 笔记管理页 (宇宙星空主题)-->
+<view class="container">
+  <view class="cosmic-bg"></view>
+  
+  <view class="header">
+    <text class="page-title">📖 笔记管理</text>
+    <text class="page-subtitle">共 {{notes.length}} 条笔记</text>
+  </view>
+
+  <view class="search-section">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索笔记..." value="{{searchValue}}" bindinput="onSearchInput" />
+      <text class="clear-btn" wx:if="{{searchValue}}" bindtap="clearSearch">×</text>
+    </view>
+  </view>
+
+  <scroll-view class="notes-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view 
+      class="note-card glass-card"
+      wx:for="{{filteredNotes}}"
+      wx:key="termId"
+      data-termid="{{item.termId}}"
+      bindtap="goToTerm"
+    >
+      <view class="note-header">
+        <text class="note-term">{{item.termName}}</text>
+        <text class="note-date">{{item.updatedAt ? formatDate(item.updatedAt) : ''}}</text>
+      </view>
+      <text class="note-content">{{item.content}}</text>
+      <view class="note-actions">
+        <view class="action-btn edit" catchtap="editNote" data-termid="{{item.termId}}">编辑</view>
+        <view class="action-btn delete" catchtap="deleteNote" data-termid="{{item.termId}}">删除</view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{filteredNotes.length === 0}}">
+      <text class="empty-icon">📖</text>
+      <text class="empty-text">{{searchValue ? '没有找到相关笔记' : '暂无笔记'}}</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,260 @@
+/* pages/learning/checkin/index.wxss - 打卡日历页 (宇宙星空主题) */
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 160rpx;
+}
+
+/* 头部 */
+.header {
+  padding: 96rpx 32rpx 32rpx;
+  text-align: center;
+}
+
+.page-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 12rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 统计卡片 */
+.stats-card {
+  margin: 0 32rpx 24rpx;
+  padding: 32rpx;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #00d9ff;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.stat-divider {
+  width: 1rpx;
+  height: 80rpx;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 日历区域 */
+.calendar-section {
+  margin: 0 32rpx 24rpx;
+  padding: 24rpx;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.calendar-btn {
+  font-size: 40rpx;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0 24rpx;
+}
+
+.calendar-btn:active {
+  color: #00d9ff;
+}
+
+.calendar-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 星期标题 */
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 16rpx;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 12rpx 0;
+}
+
+/* 日期网格 */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8rpx;
+}
+
+.day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16rpx;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.day-cell:active:not(.future) {
+  background: rgba(0, 217, 255, 0.15);
+  transform: scale(0.95);
+}
+
+.day-number {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.day-cell.today .day-number {
+  color: #00d9ff;
+  font-weight: bold;
+}
+
+.day-cell.checked .day-number {
+  color: #00d9ff;
+  font-weight: bold;
+}
+
+.day-cell.future .day-number {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.day-cell.today {
+  background: rgba(0, 217, 255, 0.1);
+  border: 1rpx solid rgba(0, 217, 255, 0.3);
+}
+
+.day-cell.checked {
+  background: rgba(0, 217, 255, 0.15);
+  border: 1rpx solid rgba(0, 217, 255, 0.3);
+}
+
+.checkin-icon {
+  position: absolute;
+  bottom: 4rpx;
+  font-size: 20rpx;
+}
+
+/* 打卡规则 */
+.rules-section {
+  margin: 0 32rpx 24rpx;
+  padding: 24rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20rpx;
+}
+
+.rule-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.05);
+}
+
+.rule-item:last-child {
+  border-bottom: none;
+}
+
+.rule-icon {
+  font-size: 24rpx;
+  color: #00d9ff;
+}
+
+.rule-text {
+  flex: 1;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 勋章预览 */
+.badges-preview {
+  margin: 0 32rpx 24rpx;
+  padding: 24rpx;
+}
+
+.badges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 20rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.badge-item.unlocked {
+  background: rgba(0, 217, 255, 0.08);
+  border: 1rpx solid rgba(0, 217, 255, 0.2);
+}
+
+.badge-item.locked {
+  opacity: 0.5;
+}
+
+.badge-icon {
+  font-size: 48rpx;
+}
+
+.badge-name {
+  flex: 1;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.badge-condition {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.badge-item.unlocked .badge-condition {
+  color: #00d9ff;
+}
+
+/* 底部占位 */
+.bottom-spacer {
+  height: 40rpx;
+}

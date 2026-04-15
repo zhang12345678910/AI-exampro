@@ -1,0 +1,172 @@
+<!--pages/dictionary/list/index.wxml - 词典列表页 (宇宙星空主题)-->
+<view class="container">
+  <!-- 宇宙背景 -->
+  <view class="cosmic-bg"></view>
+  
+  <!-- 搜索框 -->
+  <view class="search-section">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input 
+        class="search-input" 
+        placeholder="搜索 AI 术语..." 
+        value="{{searchValue}}"
+        bindinput="onSearchInput"
+        confirm-type="search"
+        bindconfirm="onSearchConfirm"
+      />
+      <text 
+        class="clear-btn" 
+        wx:if="{{searchValue}}"
+        bindtap="clearSearch"
+      >×</text>
+    </view>
+  </view>
+
+  <!-- 检索方式切换 -->
+  <view class="search-mode-bar">
+    <view 
+      class="mode-item {{searchMode === item.id ? 'active' : ''}}"
+      wx:for="{{searchModes}}"
+      wx:key="id"
+      data-mode="{{item.id}}"
+      bindtap="switchSearchMode"
+    >
+      {{item.name}}
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <view class="category-filter" wx:if="{{categories.length > 0}}">
+    <scroll-view class="category-scroll" scroll-x show-scrollbar="{{false}}">
+      <view class="category-list">
+        <view 
+          class="category-chip {{selectedCategory === item._id ? 'active' : ''}}"
+          wx:for="{{categories}}"
+          wx:key="_id"
+          data-id="{{item._id}}"
+          bindtap="selectCategory"
+        >
+          <text class="category-chip-icon">{{item.icon}}</text>
+          <text class="category-chip-name">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view 
+      class="reset-btn" 
+      wx:if="{{selectedCategory}}"
+      bindtap="resetFilter"
+    >
+      重置
+    </view>
+  </view>
+
+  <!-- 术语列表 -->
+  <scroll-view 
+    class="terms-scroll" 
+    scroll-y 
+    enhanced
+    show-scrollbar="{{false}}"
+    bindscrolltolower="loadMoreTerms"
+  >
+    <!-- 术语卡片 -->
+    <view 
+      class="term-card glass-card"
+      wx:for="{{filteredList}}"
+      wx:key="_id"
+      data-id="{{item._id}}"
+      bindtap="goToDetail"
+    >
+      <view class="term-card-content">
+        <view class="term-card-header">
+          <view class="term-title-wrapper">
+            <text class="term-name">{{item.name}}</text>
+            <text class="sparkle-icon">✨</text>
+          </view>
+          <text class="term-name-en" wx:if="{{item.nameEn}}">{{item.nameEn}}</text>
+        </view>
+        
+        <view class="term-meta">
+          <view class="difficulty-tag tag-primary" wx:if="{{item.difficulty === 1}}">入门</view>
+          <view class="difficulty-tag tag-secondary" wx:if="{{item.difficulty === 2}}">进阶</view>
+          <view class="difficulty-tag tag-accent" wx:if="{{item.difficulty === 3}}">专业</view>
+          <text class="category-label">{{item.category}}</text>
+        </view>
+        
+        <text class="term-definition">{{item.definition ? (item.definition.simple || item.definition) : '暂无解释'}}</text>
+      </view>
+      
+      <view class="term-card-action">
+        <text class="book-icon">📖</text>
+      </view>
+    </view>
+
+    <!-- 加载中 -->
+    <view class="loading-container" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">正在加载...</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && filteredList.length === 0}}">
+      <text class="empty-icon">🔍</text>
+      <text class="empty-text">没有找到相关术语</text>
+      <text class="empty-hint">换个关键词试试吧</text>
+    </view>
+
+    <!-- 没有更多 -->
+    <view class="no-more" wx:if="{{!hasMore && termList.length > 0}}">
+      <text class="no-more-text">— 已经到底了 —</text>
+    </view>
+  </scroll-view>
+
+  <!-- 术语详情弹窗 -->
+  <view class="modal-mask" wx:if="{{selectedTerm}}" bindtap="closeDetail">
+    <view class="modal-content" catchtap="preventClose">
+      <view class="modal-header">
+        <view>
+          <text class="modal-term-name">{{selectedTerm.name}}</text>
+          <text class="modal-term-name-en" wx:if="{{selectedTerm.nameEn}}">{{selectedTerm.nameEn}}</text>
+          <view class="modal-tags">
+            <view class="difficulty-tag tag-primary" wx:if="{{selectedTerm.difficulty === 1}}">入门</view>
+            <view class="difficulty-tag tag-secondary" wx:if="{{selectedTerm.difficulty === 2}}">进阶</view>
+            <view class="difficulty-tag tag-accent" wx:if="{{selectedTerm.difficulty === 3}}">专业</view>
+            <text class="category-tag">{{selectedTerm.category}}</text>
+          </view>
+        </view>
+        <text class="modal-close" bindtap="closeDetail">×</text>
+      </view>
+
+      <view class="modal-body">
+        <view class="modal-section">
+          <text class="modal-section-title">📖 通俗解释</text>
+          <text class="modal-section-content">{{selectedTerm.definition ? (selectedTerm.definition.simple || selectedTerm.definition) : '暂无解释'}}</text>
+        </view>
+
+        <view class="modal-section" wx:if="{{selectedTerm.definition && selectedTerm.definition.professional}}">
+          <text class="modal-section-title">📚 专业定义</text>
+          <text class="modal-section-content">{{selectedTerm.definition.professional}}</text>
+        </view>
+
+        <view class="modal-section" wx:if="{{selectedTerm.examples && selectedTerm.examples.length > 0}}">
+          <text class="modal-section-title">💡 典型例句</text>
+          <view class="examples-list">
+            <view class="example-item" wx:for="{{selectedTerm.examples}}" wx:key="index">
+              <text class="example-scenario">{{item.scenario}}：</text>
+              <text class="example-content">{{item.content}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="modal-actions">
+          <view class="action-btn-wrapper">
+            <view class="modal-action-btn" bindtap="toggleCollection">
+              <text class="action-btn-icon">{{isCollected ? '⭐' : '☆'}}</text>
+              <text class="action-btn-text">{{isCollected ? '已收藏' : '收藏'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

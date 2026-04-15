@@ -1,0 +1,260 @@
+<!--pages/learning/level/index.wxml - 分级学习页 (宇宙星空主题)-->
+<view class="container">
+  <!-- 宇宙背景 -->
+  <view class="cosmic-bg"></view>
+  
+  <!-- 头部 -->
+  <view class="header">
+    <text class="page-title">分级学习</text>
+    <text class="page-subtitle">选择你的学习路径</text>
+  </view>
+
+  <!-- 学习级别卡片 -->
+  <scroll-view 
+    class="content-scroll" 
+    scroll-y 
+    enhanced
+    show-scrollbar="{{false}}"
+  >
+    <!-- 入门级别 -->
+    <view 
+      class="level-card glass-card {{levelProgress[0].locked ? 'locked' : ''}}"
+      data-level="0"
+      bindtap="selectLevel"
+    >
+      <view class="level-card-bg"></view>
+      
+      <view class="level-header">
+        <view class="level-icon-wrapper">
+          <text class="level-icon">🌱</text>
+          <text class="level-lock" wx:if="{{levelProgress[0].locked}}">🔒</text>
+        </view>
+        <view class="level-info">
+          <text class="level-name">{{levelProgress[0].name}}</text>
+          <text class="level-desc">{{levelProgress[0].desc}}</text>
+        </view>
+      </view>
+      
+      <view class="level-progress" wx:if="{{!levelProgress[0].locked}}">
+        <view class="progress-header">
+          <text class="progress-text">进度：{{levelProgress[0].learned}}/{{levelProgress[0].total}}</text>
+          <text class="progress-percent">{{levelProgress[0].percent}}%</text>
+        </view>
+        <view class="progress-bar-bg">
+          <view 
+            class="progress-bar-fill" 
+            style="width: {{levelProgress[0].percent}}%;"
+          ></view>
+        </view>
+      </view>
+      
+      <view class="level-action" wx:if="{{!levelProgress[0].locked}}">
+        <view class="start-btn">
+          <text class="start-btn-text">{{levelProgress[0].learned > 0 ? '继续学习' : '开始学习'}}</text>
+          <text class="start-btn-arrow">→</text>
+        </view>
+      </view>
+      
+      <view class="locked-hint" wx:if="{{levelProgress[0].locked}}">
+        <text>完成前置等级后解锁</text>
+      </view>
+    </view>
+
+    <!-- 进阶级别 -->
+    <view 
+      class="level-card glass-card {{levelProgress[1].locked ? 'locked' : ''}}"
+      data-level="1"
+      bindtap="selectLevel"
+    >
+      <view class="level-card-bg"></view>
+      
+      <view class="level-header">
+        <view class="level-icon-wrapper">
+          <text class="level-icon">🚀</text>
+          <text class="level-lock" wx:if="{{levelProgress[1].locked}}">🔒</text>
+        </view>
+        <view class="level-info">
+          <text class="level-name">{{levelProgress[1].name}}</text>
+          <text class="level-desc">{{levelProgress[1].desc}}</text>
+        </view>
+      </view>
+      
+      <view class="level-progress" wx:if="{{!levelProgress[1].locked}}">
+        <view class="progress-header">
+          <text class="progress-text">进度：{{levelProgress[1].learned}}/{{levelProgress[1].total}}</text>
+          <text class="progress-percent">{{levelProgress[1].percent}}%</text>
+        </view>
+        <view class="progress-bar-bg">
+          <view 
+            class="progress-bar-fill" 
+            style="width: {{levelProgress[1].percent}}%;"
+          ></view>
+        </view>
+      </view>
+      
+      <view class="level-action" wx:if="{{!levelProgress[1].locked}}">
+        <view class="start-btn">
+          <text class="start-btn-text">{{levelProgress[1].learned > 0 ? '继续学习' : '开始学习'}}</text>
+          <text class="start-btn-arrow">→</text>
+        </view>
+      </view>
+      
+      <view class="locked-hint" wx:if="{{levelProgress[1].locked}}">
+        <text>完成前置等级后解锁</text>
+      </view>
+    </view>
+
+    <!-- 专业级别 -->
+    <view 
+      class="level-card glass-card {{levelProgress[2].locked ? 'locked' : ''}}"
+      data-level="2"
+      bindtap="selectLevel"
+    >
+      <view class="level-card-bg"></view>
+      
+      <view class="level-header">
+        <view class="level-icon-wrapper">
+          <text class="level-icon">🎯</text>
+          <text class="level-lock" wx:if="{{levelProgress[2].locked}}">🔒</text>
+        </view>
+        <view class="level-info">
+          <text class="level-name">{{levelProgress[2].name}}</text>
+          <text class="level-desc">{{levelProgress[2].desc}}</text>
+        </view>
+      </view>
+      
+      <view class="level-progress" wx:if="{{!levelProgress[2].locked}}">
+        <view class="progress-header">
+          <text class="progress-text">进度：{{levelProgress[2].learned}}/{{levelProgress[2].total}}</text>
+          <text class="progress-percent">{{levelProgress[2].percent}}%</text>
+        </view>
+        <view class="progress-bar-bg">
+          <view 
+            class="progress-bar-fill" 
+            style="width: {{levelProgress[2].percent}}%;"
+          ></view>
+        </view>
+      </view>
+      
+      <view class="level-action" wx:if="{{!levelProgress[2].locked}}">
+        <view class="start-btn">
+          <text class="start-btn-text">{{levelProgress[2].learned > 0 ? '继续学习' : '开始学习'}}</text>
+          <text class="start-btn-arrow">→</text>
+        </view>
+      </view>
+      
+      <view class="locked-hint" wx:if="{{levelProgress[2].locked}}">
+        <text>完成前置等级后解锁</text>
+      </view>
+    </view>
+
+    <!-- 每日打卡 -->
+    <view class="checkin-section glass-card">
+      <view class="section-header">
+        <text class="section-icon">📅</text>
+        <text class="section-title">每日打卡</text>
+      </view>
+      
+      <view class="checkin-stats">
+        <view class="stat-item">
+          <text class="stat-value">{{continuousCheckInDays}}</text>
+          <text class="stat-label">连续打卡</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{totalCheckInDays}}</text>
+          <text class="stat-label">总打卡天数</text>
+        </view>
+      </view>
+      
+      <view class="checkin-action">
+        <view 
+          class="checkin-btn {{isCheckInToday ? 'checked' : ''}}"
+          bindtap="doCheckIn"
+        >
+          <text class="checkin-btn-text">{{isCheckInToday ? '今日已打卡' : '立即打卡'}}</text>
+          <text class="checkin-btn-icon" wx:if="{{isCheckInToday}}">✅</text>
+        </view>
+      </view>
+      
+      <view class="checkin-link" bindtap="goToCheckInCalendar">
+        <text class="checkin-link-text">查看打卡日历</text>
+        <text class="checkin-link-arrow">→</text>
+      </view>
+    </view>
+
+    <!-- 简单测试 -->
+    <view class="quiz-section glass-card">
+      <view class="section-header">
+        <text class="section-icon">📝</text>
+        <text class="section-title">简单测试</text>
+      </view>
+      
+      <view class="quiz-list">
+        <view 
+          class="quiz-item"
+          data-level="0"
+          bindtap="startQuiz"
+        >
+          <view class="quiz-item-header">
+            <text class="quiz-name">入门测试</text>
+            <text class="quiz-count">5 题</text>
+          </view>
+          <text class="quiz-desc">检验入门级别学习成果</text>
+        </view>
+        
+        <view 
+          class="quiz-item {{levelProgress[1].locked ? 'locked' : ''}}"
+          data-level="1"
+          bindtap="startQuiz"
+        >
+          <view class="quiz-item-header">
+            <text class="quiz-name">进阶测试</text>
+            <text class="quiz-count">10 题</text>
+            <text class="quiz-lock" wx:if="{{levelProgress[1].locked}}">🔒</text>
+          </view>
+          <text class="quiz-desc">检验进阶级别学习成果</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部占位 -->
+    <view class="bottom-spacer"></view>
+  </scroll-view>
+
+  <!-- 底部导航栏 -->
+  <view class="tab-bar">
+    <view 
+      class="tab-item {{currentTab === 'home' ? 'active' : ''}}"
+      data-tab="home"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">🏠</text>
+      <text class="tab-label">首页</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'dictionary' ? 'active' : ''}}"
+      data-tab="dictionary"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">📖</text>
+      <text class="tab-label">词典</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'learning' ? 'active' : ''}}"
+      data-tab="learning"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">📚</text>
+      <text class="tab-label">学习</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'profile' ? 'active' : ''}}"
+      data-tab="profile"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">👤</text>
+      <text class="tab-label">我的</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,48 @@
+<!--pages/profile/stats/index.wxml - 学习记录页 (宇宙星空主题)-->
+<view class="container">
+  <view class="cosmic-bg"></view>
+  
+  <view class="header">
+    <text class="page-title">📊 学习记录</text>
+    <text class="page-subtitle">你的学习足迹</text>
+  </view>
+
+  <scroll-view class="content-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <!-- 学习统计 -->
+    <view class="stats-card glass-card">
+      <view class="stats-grid">
+        <view class="stat-item"><text class="stat-value">{{stats.totalLearnedDays}}</text><text class="stat-label">学习天数</text></view>
+        <view class="stat-item"><text class="stat-value">{{stats.learnedTermsCount}}</text><text class="stat-label">已学术语</text></view>
+        <view class="stat-item"><text class="stat-value">{{stats.continuousCheckInDays}}</text><text class="stat-label">连续打卡</text></view>
+        <view class="stat-item"><text class="stat-value">{{stats.quizAvgScore}}</text><text class="stat-label">测验均分</text></view>
+      </view>
+    </view>
+
+    <!-- 测验记录 -->
+    <view class="section-card glass-card">
+      <view class="section-title">📝 测验记录</view>
+      <view class="quiz-list">
+        <view class="quiz-item" wx:for="{{quizScores}}" wx:key="date">
+          <view class="quiz-header">
+            <text class="quiz-date">{{item.date}}</text>
+            <text class="quiz-level">{{item.level}}</text>
+          </view>
+          <view class="quiz-score {{item.score >= 80 ? 'excellent' : item.score >= 60 ? 'pass' : 'fail'}}">{{item.score}}分</view>
+        </view>
+        <view class="empty-tip" wx:if="{{quizScores.length === 0}}">暂无测验记录</view>
+      </view>
+    </view>
+
+    <!-- 最近学习 -->
+    <view class="section-card glass-card">
+      <view class="section-title">🕐 最近学习</view>
+      <view class="recent-list">
+        <view class="recent-item" wx:for="{{recentViews}}" wx:key="termId">
+          <text class="recent-name">{{item.name}}</text>
+          <text class="recent-time">{{item.viewedAt}}</text>
+        </view>
+        <view class="empty-tip" wx:if="{{recentViews.length === 0}}">暂无学习记录</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

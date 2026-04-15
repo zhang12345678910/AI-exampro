@@ -1,0 +1,9 @@
+{
+  "name": "getDailyWord",
+  "version": "1.0.0",
+  "description": "获取每日一词",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

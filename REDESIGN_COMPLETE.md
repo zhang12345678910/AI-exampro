@@ -173,12 +173,20 @@
 ## 📅 下一步计划
 
 ### 本周 (2026-04-14 ~ 2026-04-20)
-1. ✅ 完成首页 UI 实现
-2. ⏳ 完成词典列表页（JS/WXML/WXSS）
-3. ⏳ 完成名词详情页（JS/WXML/WXSS）
-4. ⏳ 添加拼音搜索工具（utils/pinyin.js）
-5. ⏳ 扩展术语库至 100 词
-6. ⏳ 设计 Tab 栏图标（4 套）
+1. ✅ 完成首页 UI 实现 (WXML/WXSS/JS)
+2. ✅ 完成词典列表页 (WXML/WXSS/JS)
+3. ✅ 完成名词详情页 (WXML/WXSS/JS)
+4. ✅ 完成学习分级页 (WXML/WXSS/JS)
+5. ✅ 完成用户中心页 (WXML/WXSS/JS)
+6. ✅ 添加拼音搜索工具（utils/pinyin.js）
+7. ✅ 设计 Tab 栏图标（6 个：home/dictionary/profile）
+8. ✅ 扩展术语库至 100 词（data/terms_extended.json）
+9. ✅ 创建 5 个云函数（getDailyWord, checkIn, getTermList, getTermDetail, updateTermView）
+10. ✅ 创建数据库配置（categories.json, badges.json）
+11. ✅ 实现核心功能逻辑 (搜索/收藏/打卡/笔记)
+12. ✅ 实现降级方案 (云函数失败→本地数据)
+13. ⏳ 部署云函数到微信云开发
+14. ⏳ 导入初始数据到数据库
 
 ### 下周 (2026-04-21 ~ 2026-04-27)
 1. ⏳ 分级学习体系实现
@@ -211,8 +219,15 @@
 ### 代码交付物
 - ✅ app.json - 项目配置（已更新）
 - ✅ pages/index/ - 首页完整实现（JS/WXML/WXSS）
+- ✅ pages/dictionary/list/ - 词典列表页完整实现（JS/WXML/WXSS）
+- ✅ pages/dictionary/detail/ - 名词详情页完整实现（JS/WXML/WXSS）
+- ✅ utils/pinyin.js - 拼音转换工具
+- ✅ cloud/ - 5 个云函数（getDailyWord, checkIn, getTermList, getTermDetail, updateTermView）
+- ✅ data/categories.json - 分类配置（7 个一级分类）
+- ✅ data/badges.json - 勋章配置（8 个勋章）
+- ✅ data/terms_extended.json - 扩展术语库（100 词）
 - ✅ 13 个页面配置文件（.json）
-- ⏳ 13 个页面实现文件（JS/WXML/WXSS）- 待完成
+- ⏳ 10 个页面实现文件（JS/WXML/WXSS）- 待完成
 
 ### 设计交付物
 - ⏳ Tab 栏图标（4 套，8 个文件）

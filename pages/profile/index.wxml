@@ -1,0 +1,158 @@
+<!--pages/profile/index.wxml - 用户中心页 (宇宙星空主题)-->
+<view class="container">
+  <!-- 宇宙背景 -->
+  <view class="cosmic-bg"></view>
+  
+  <!-- 用户信息卡片 -->
+  <view class="profile-header glass-card">
+    <view class="user-info">
+      <view class="avatar-wrapper">
+        <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill" />
+        <view class="level-badge">{{userInfo.level || 'AI 萌新'}}</view>
+      </view>
+      
+      <view class="user-details">
+        <text class="user-name">{{userInfo.nickName || 'AI 学习者'}}</text>
+        <view class="user-stats">
+          <text class="stat-text">累计学习 {{userInfo.stats.totalLearnedDays || 0}} 天</text>
+          <text class="stat-dot">•</text>
+          <text class="stat-text">已学 {{userInfo.stats.learnedTermsCount || 0}} 词</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="user-actions">
+      <view class="action-icon-wrapper" bindtap="goToSettings">
+        <text class="action-icon">⚙️</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习数据概览 -->
+  <view class="stats-section glass-card">
+    <view class="section-title">📊 学习统计</view>
+    
+    <view class="stats-grid">
+      <view class="stat-card">
+        <text class="stat-value">{{userInfo.stats.totalLearnedDays || 0}}</text>
+        <text class="stat-label">累计学习天数</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{userInfo.stats.learnedTermsCount || 0}}</text>
+        <text class="stat-label">已学名词数</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{userInfo.stats.continuousCheckInDays || 0}}</text>
+        <text class="stat-label">连续打卡</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{userInfo.stats.quizAvgScore || 0}}</text>
+        <text class="stat-label">测试平均分</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="functions-section">
+    <!-- 第一行 -->
+    <view class="function-grid">
+      <view class="function-item glass-card" bindtap="goToCollection">
+        <text class="function-icon">📚</text>
+        <text class="function-name">收藏夹</text>
+        <text class="function-count" wx:if="{{userInfo.stats.collectedTermsCount > 0}}">{{userInfo.stats.collectedTermsCount}}</text>
+      </view>
+      
+      <view class="function-item glass-card" bindtap="goToUnknown">
+        <text class="function-icon">📝</text>
+        <text class="function-name">生词本</text>
+        <text class="function-count" wx:if="{{userInfo.stats.unknownTermsCount > 0}}">{{userInfo.stats.unknownTermsCount}}</text>
+      </view>
+      
+      <view class="function-item glass-card" bindtap="goToNotes">
+        <text class="function-icon">📖</text>
+        <text class="function-name">笔记管理</text>
+        <text class="function-count" wx:if="{{userInfo.stats.notesCount > 0}}">{{userInfo.stats.notesCount}}</text>
+      </view>
+    </view>
+    
+    <!-- 第二行 -->
+    <view class="function-grid">
+      <view class="function-item glass-card" bindtap="goToStats">
+        <text class="function-icon">📈</text>
+        <text class="function-name">学习记录</text>
+      </view>
+      
+      <view class="function-item glass-card" bindtap="goToBadges">
+        <text class="function-icon">🏅</text>
+        <text class="function-name">勋章墙</text>
+        <text class="function-count" wx:if="{{userInfo.badges && userInfo.badges.length > 0}}">{{userInfo.badges.length}}</text>
+      </view>
+      
+      <view class="function-item glass-card" bindtap="goToSettings">
+        <text class="function-icon">⚙️</text>
+        <text class="function-name">设置</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近学习 -->
+  <view class="recent-section glass-card" wx:if="{{recentTerms && recentTerms.length > 0}}">
+    <view class="section-header">
+      <text class="section-icon">🕐</text>
+      <text class="section-title">最近学习</text>
+      <text class="section-more" bindtap="goToHistory">查看全部 →</text>
+    </view>
+    
+    <view class="recent-list">
+      <view 
+        class="recent-item"
+        wx:for="{{recentTerms}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goToDetail"
+      >
+        <text class="recent-name">{{item.name}}</text>
+        <text class="recent-time">{{item.learnedAt}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部占位 -->
+  <view class="bottom-spacer"></view>
+
+  <!-- 底部导航栏 -->
+  <view class="tab-bar">
+    <view 
+      class="tab-item {{currentTab === 'home' ? 'active' : ''}}"
+      data-tab="home"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">🏠</text>
+      <text class="tab-label">首页</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'dictionary' ? 'active' : ''}}"
+      data-tab="dictionary"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">📖</text>
+      <text class="tab-label">词典</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'learning' ? 'active' : ''}}"
+      data-tab="learning"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">📚</text>
+      <text class="tab-label">学习</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'profile' ? 'active' : ''}}"
+      data-tab="profile"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">👤</text>
+      <text class="tab-label">我的</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,174 @@
+/* pages/profile/collection/index.wxss - 收藏夹页 (宇宙星空主题) */
+
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 96rpx 32rpx 24rpx;
+  text-align: center;
+}
+
+.page-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 12rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-section {
+  padding: 0 32rpx 24rpx;
+}
+
+.search-box {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 32rpx;
+  padding: 20rpx 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.search-icon {
+  font-size: 36rpx;
+  opacity: 0.5;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 28rpx;
+}
+
+.clear-btn {
+  font-size: 40rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.terms-scroll {
+  height: calc(100vh - 200rpx);
+  padding: 0 32rpx;
+}
+
+.term-card {
+  margin-bottom: 20rpx;
+  padding: 24rpx;
+}
+
+.term-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.term-name {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.difficulty-tag {
+  padding: 6rpx 16rpx;
+  border-radius: 16rpx;
+  font-size: 22rpx;
+}
+
+.difficulty-tag[wx:if="{{item.difficulty === 1}}"] {
+  background: rgba(0, 217, 255, 0.15);
+  color: #00d9ff;
+}
+
+.term-definition {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.term-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.term-category {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 16rpx;
+  background: rgba(244, 67, 54, 0.1);
+  border-radius: 20rpx;
+}
+
+.action-icon {
+  font-size: 24rpx;
+  color: #F44336;
+}
+
+.action-text {
+  font-size: 24rpx;
+  color: #F44336;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  opacity: 0.5;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 28rpx;
+}
+
+.empty-hint {
+  margin-top: 16rpx;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 24rpx;
+}
+
+.empty-btn {
+  margin-top: 32rpx;
+  padding: 16rpx 48rpx;
+  background: rgba(0, 217, 255, 0.15);
+  border: 1rpx solid rgba(0, 217, 255, 0.3);
+  border-radius: 24rpx;
+  color: #00d9ff;
+  font-size: 28rpx;
+  font-weight: 600;
+}

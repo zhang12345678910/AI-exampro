@@ -1,0 +1,507 @@
+/* pages/dictionary/list/index.wxss - 词典列表页 (宇宙星空主题) */
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+/* 搜索区域 */
+.search-section {
+  padding: 96rpx 32rpx 24rpx;
+}
+
+.search-box {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 32rpx;
+  padding: 24rpx 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.search-icon {
+  font-size: 36rpx;
+  opacity: 0.5;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 28rpx;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.clear-btn {
+  font-size: 40rpx;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0 8rpx;
+  line-height: 1;
+}
+
+/* 检索方式切换 */
+.search-mode-bar {
+  display: flex;
+  gap: 16rpx;
+  padding: 0 32rpx 24rpx;
+}
+
+.mode-item {
+  padding: 12rpx 24rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.mode-item.active {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: rgba(0, 217, 255, 0.3);
+  color: #00d9ff;
+  font-weight: 600;
+}
+
+/* 分类筛选 */
+.category-filter {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 0 32rpx 24rpx;
+}
+
+.category-scroll {
+  flex: 1;
+}
+
+.category-list {
+  display: flex;
+  gap: 16rpx;
+  padding-bottom: 8rpx;
+}
+
+.category-chip {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 24rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 24rpx;
+  transition: all 0.3s ease;
+}
+
+.category-chip.active {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: rgba(0, 217, 255, 0.3);
+}
+
+.category-chip-icon {
+  font-size: 28rpx;
+}
+
+.category-chip-name {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.category-chip.active .category-chip-name {
+  color: #00d9ff;
+  font-weight: 600;
+}
+
+.reset-btn {
+  padding: 12rpx 24rpx;
+  background: transparent;
+  border: 1rpx solid rgba(0, 217, 255, 0.5);
+  border-radius: 24rpx;
+  font-size: 26rpx;
+  color: #00d9ff;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:active {
+  background: rgba(0, 217, 255, 0.1);
+}
+
+/* 术语列表滚动区域 */
+.terms-scroll {
+  height: calc(100vh - 280rpx);
+  padding: 0 32rpx;
+}
+
+/* 术语卡片 */
+.term-card {
+  margin-bottom: 20rpx;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.term-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.03) 0%, rgba(183, 148, 246, 0.03) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.term-card:active {
+  border-color: rgba(0, 217, 255, 0.3);
+  transform: translateY(-4rpx);
+}
+
+.term-card:active::before {
+  opacity: 1;
+}
+
+.term-card-content {
+  flex: 1;
+}
+
+.term-card-header {
+  margin-bottom: 16rpx;
+}
+
+.term-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.term-name {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: var(--font-display);
+}
+
+.sparkle-icon {
+  font-size: 28rpx;
+  opacity: 0.6;
+}
+
+.term-name-en {
+  display: block;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.term-meta {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.difficulty-tag {
+  padding: 6rpx 16rpx;
+  border-radius: 16rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.tag-primary {
+  background: rgba(0, 217, 255, 0.15);
+  color: #00d9ff;
+}
+
+.tag-secondary {
+  background: rgba(183, 148, 246, 0.15);
+  color: #b794f6;
+}
+
+.tag-accent {
+  background: rgba(236, 72, 153, 0.15);
+  color: #ec4899;
+}
+
+.category-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.term-definition {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.term-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-icon {
+  font-size: 36rpx;
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+
+.term-card:active .book-icon {
+  opacity: 0.6;
+  color: #00d9ff;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+}
+
+.loading-spinner {
+  width: 64rpx;
+  height: 64rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.1);
+  border-top-color: #00d9ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 26rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  opacity: 0.5;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 28rpx;
+}
+
+.empty-hint {
+  margin-top: 16rpx;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 24rpx;
+}
+
+/* 没有更多 */
+.no-more {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.no-more-text {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 24rpx;
+}
+
+/* 详情弹窗 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8rpx);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 640rpx;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(40rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 32rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32rpx;
+}
+
+.modal-term-name {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: var(--font-display);
+  margin-bottom: 8rpx;
+}
+
+.modal-term-name-en {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 16rpx;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.category-tag {
+  padding: 6rpx 16rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.modal-close {
+  font-size: 56rpx;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1;
+  padding: 0 16rpx;
+}
+
+.modal-close:active {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-body {
+  padding-top: 8rpx;
+}
+
+.modal-section {
+  margin-bottom: 32rpx;
+}
+
+.modal-section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 16rpx;
+}
+
+.modal-section-content {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.examples-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.example-item {
+  padding: 20rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1rpx solid rgba(255, 255, 255, 0.08);
+  border-radius: 20rpx;
+}
+
+.example-scenario {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.example-content {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.modal-actions {
+  padding-top: 24rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  padding: 24rpx 48rpx;
+  background: linear-gradient(135deg, #00d9ff 0%, #b794f6 100%);
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 217, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.modal-action-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 16rpx rgba(0, 217, 255, 0.2);
+}
+
+.action-btn-icon {
+  font-size: 48rpx;
+}
+
+.action-btn-text {
+  font-size: 26rpx;
+  color: white;
+  font-weight: 600;
+}

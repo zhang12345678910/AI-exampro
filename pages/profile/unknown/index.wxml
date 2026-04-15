@@ -1,0 +1,37 @@
+<!--pages/profile/unknown/index.wxml - 生词本页 (宇宙星空主题)-->
+<view class="container">
+  <view class="cosmic-bg"></view>
+  
+  <view class="header">
+    <text class="page-title">📝 生词本</text>
+    <text class="page-subtitle">需要复习的术语 ({{unknownTerms.length}}个)</text>
+  </view>
+
+  <scroll-view class="terms-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view 
+      class="term-card glass-card"
+      wx:for="{{unknownTerms}}"
+      wx:key="_id"
+      data-id="{{item._id}}"
+      bindtap="goToDetail"
+    >
+      <view class="term-header">
+        <text class="term-name">{{item.name}}</text>
+        <text class="wrong-count">错{{item.wrongCount || 1}}次</text>
+      </view>
+      <text class="term-definition">{{item.definition ? (item.definition.simple || item.definition) : ''}}</text>
+      <view class="term-footer">
+        <text class="term-category">{{item.category}}</text>
+        <view class="action-btn mastered" catchtap="markMastered" data-id="{{item._id}}">
+          <text class="action-text">已掌握</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{unknownTerms.length === 0}}">
+      <text class="empty-icon">✅</text>
+      <text class="empty-text">太棒了！</text>
+      <text class="empty-hint">所有生词都已掌握</text>
+    </view>
+  </scroll-view>
+</view>

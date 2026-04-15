@@ -1,0 +1,152 @@
+<!--pages/learning/quiz/index.wxml - 测验页 (宇宙星空主题)-->
+<view class="container">
+  <!-- 宇宙背景 -->
+  <view class="cosmic-bg"></view>
+  
+  <!-- 测验头部 -->
+  <view class="quiz-header" wx:if="{{!quizFinished}}">
+    <view class="progress-info">
+      <text class="progress-text">第 {{currentQuestion + 1}} / {{questions.length}} 题</text>
+      <text class="score-text">得分：{{score}}</text>
+    </view>
+    <view class="progress-bar-bg">
+      <view 
+        class="progress-bar-fill" 
+        style="width: {{((currentQuestion + 1) / questions.length) * 100}}%;"
+      ></view>
+    </view>
+  </view>
+
+  <!-- 题目内容 -->
+  <view class="quiz-content" wx:if="{{!quizFinished && questions.length > 0}}">
+    <view class="question-card glass-card">
+      <view class="question-type">
+        <text class="type-tag">{{questions[currentQuestion].type === 'single_choice' ? '单选题' : '判断题'}}</text>
+        <text class="difficulty-tag" wx:if="{{questions[currentQuestion].difficulty === 1}}">简单</text>
+        <text class="difficulty-tag" wx:if="{{questions[currentQuestion].difficulty === 2}}">中等</text>
+        <text class="difficulty-tag" wx:if="{{questions[currentQuestion].difficulty === 3}}">困难</text>
+      </view>
+      
+      <text class="question-text">{{questions[currentQuestion].question}}</text>
+      
+      <!-- 选项 -->
+      <view class="options-list" wx:if="{{questions[currentQuestion].type === 'single_choice'}}">
+        <view 
+          class="option-item glass-card {{selectedAnswer === index ? 'selected' : ''}} {{showResult ? (index === questions[currentQuestion].answer ? 'correct' : (selectedAnswer === index ? 'wrong' : '')) : ''}}"
+          wx:for="{{questions[currentQuestion].options}}"
+          wx:key="index"
+          data-index="{{index}}"
+          bindtap="selectOption"
+        >
+          <text class="option-letter">{{['A', 'B', 'C', 'D'][index]}}</text>
+          <text class="option-text">{{item}}</text>
+          <text class="option-icon" wx:if="{{showResult && index === questions[currentQuestion].answer}}">✅</text>
+          <text class="option-icon" wx:if="{{showResult && selectedAnswer === index && index !== questions[currentQuestion].answer}}">❌</text>
+        </view>
+      </view>
+      
+      <!-- 判断题选项 -->
+      <view class="true-false-options" wx:if="{{questions[currentQuestion].type === 'true_false'}}">
+        <view 
+          class="tf-option {{selectedAnswer === 0 ? 'selected' : ''}}"
+          data-index="0"
+          bindtap="selectOption"
+        >
+          正确
+        </view>
+        <view 
+          class="tf-option {{selectedAnswer === 1 ? 'selected' : ''}}"
+          data-index="1"
+          bindtap="selectOption"
+        >
+          错误
+        </view>
+      </view>
+    </view>
+    
+    <!-- 操作按钮 -->
+    <view class="quiz-actions">
+      <view 
+        class="action-btn submit-btn {{selectedAnswer === null ? 'disabled' : ''}}"
+        bindtap="submitAnswer"
+      >
+        {{showResult ? '下一题' : '提交答案'}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 测验结果 -->
+  <view class="result-section glass-card" wx:if="{{quizFinished}}">
+    <view class="result-header">
+      <text class="result-emoji">{{score >= 80 ? '🎉' : score >= 60 ? '👍' : '💪'}}</text>
+      <text class="result-title">{{score >= 80 ? '太棒了！' : score >= 60 ? '不错哦！' : '继续加油！'}}</text>
+    </view>
+    
+    <view class="result-stats">
+      <view class="result-stat">
+        <text class="stat-value">{{score}}分</text>
+        <text class="stat-label">总得分</text>
+      </view>
+      <view class="result-stat">
+        <text class="stat-value">{{correctCount}}/{{questions.length}}</text>
+        <text class="stat-label">正确题数</text>
+      </view>
+      <view class="result-stat">
+        <text class="stat-value">{{timeSpent}}秒</text>
+        <text class="stat-label">用时</text>
+      </view>
+    </view>
+    
+    <view class="result-actions">
+      <view class="action-btn review-btn" bindtap="reviewQuestions">
+        查看解析
+      </view>
+      <view class="action-btn retry-btn" bindtap="retryQuiz">
+        重新测试
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-container" wx:if="{{questions.length === 0 && !quizFinished}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">暂无测验题目</text>
+    <view class="empty-btn" bindtap="goBack">返回</view>
+  </view>
+
+  <!-- 底部导航栏 -->
+  <view class="tab-bar" wx:if="{{!quizFinished}}">
+    <view 
+      class="tab-item {{currentTab === 'home' ? 'active' : ''}}"
+      data-tab="home"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">🏠</text>
+      <text class="tab-label">首页</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'dictionary' ? 'active' : ''}}"
+      data-tab="dictionary"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">📖</text>
+      <text class="tab-label">词典</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'learning' ? 'active' : ''}}"
+      data-tab="learning"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">📚</text>
+      <text class="tab-label">学习</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 'profile' ? 'active' : ''}}"
+      data-tab="profile"
+      bindtap="switchTab"
+    >
+      <text class="tab-icon">👤</text>
+      <text class="tab-label">我的</text>
+    </view>
+  </view>
+</view>

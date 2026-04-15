@@ -1,318 +1,366 @@
-/* pages/index/index.wxss */
+/* pages/index/index.wxss - 首页样式 (宇宙星空主题) */
+
 .container {
-  padding: 24rpx;
-  background-color: #F5F7FA;
-  min-height: 100vh;
-}
-
-/* 搜索框样式 */
-.search-box {
   position: relative;
-  margin-bottom: 32rpx;
+  min-height: 100vh;
+  padding-bottom: 160rpx;
 }
 
-.search-input-wrapper {
+/* 头部 */
+.header {
+  padding: 96rpx 32rpx 32rpx;
+  text-align: center;
+}
+
+.title-wrapper {
   display: flex;
   align-items: center;
-  background-color: #FFFFFF;
+  justify-content: center;
+  gap: 16rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00d9ff 0%, #b794f6 50%, #ec4899 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--font-display);
+}
+
+.title-emoji {
+  font-size: 40rpx;
+}
+
+.subtitle {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 搜索区域 */
+.search-section {
+  padding: 0 32rpx 32rpx;
+}
+
+.search-box {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
   border-radius: 32rpx;
-  padding: 20rpx 32rpx;
-  box-shadow: 0 2px 8rpx rgba(0, 0, 0, 0.08);
+  padding: 24rpx 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
 }
 
 .search-icon {
-  width: 32rpx;
-  height: 32rpx;
-  margin-right: 16rpx;
+  font-size: 36rpx;
+  opacity: 0.5;
 }
 
 .search-input {
   flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 28rpx;
-  color: #333333;
 }
 
-.clear-icon {
-  width: 28rpx;
-  height: 28rpx;
-  padding: 8rpx;
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
-/* 搜索建议 */
-.suggestions-box {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: #FFFFFF;
-  border-radius: 16rpx;
-  box-shadow: 0 4px 16rpx rgba(0, 0, 0, 0.12);
-  z-index: 100;
-  overflow: hidden;
+.clear-btn {
+  font-size: 40rpx;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0 8rpx;
+  line-height: 1;
 }
 
-.suggestion-item {
-  padding: 24rpx 32rpx;
-  border-bottom: 1rpx solid #F5F7FA;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.suggestion-item:last-child {
-  border-bottom: none;
-}
-
-.suggestion-name {
-  font-size: 28rpx;
-  color: #333333;
-  font-weight: 500;
-}
-
-.suggestion-en {
-  font-size: 24rpx;
-  color: #999999;
-}
-
-/* 搜索历史 */
-.history-box {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: #FFFFFF;
-  border-radius: 16rpx;
-  box-shadow: 0 4px 16rpx rgba(0, 0, 0, 0.12);
-  z-index: 100;
-  padding: 24rpx;
-}
-
-.history-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16rpx;
-}
-
-.history-title {
-  font-size: 26rpx;
-  color: #999999;
-}
-
-.clear-history {
-  font-size: 24rpx;
-  color: #1E88E5;
-}
-
-.history-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.history-item {
-  display: flex;
-  align-items: center;
-  background-color: #F5F7FA;
-  border-radius: 24rpx;
-  padding: 12rpx 24rpx;
-  margin-right: 16rpx;
-  margin-bottom: 16rpx;
-}
-
-.history-item text {
-  font-size: 24rpx;
-  color: #666666;
-}
-
-.delete-icon {
-  width: 24rpx;
-  height: 24rpx;
-  margin-left: 12rpx;
+/* 内容滚动区域 */
+.content-scroll {
+  height: calc(100vh - 300rpx);
+  padding: 0 32rpx;
 }
 
 /* 每日一词卡片 */
 .daily-word-card {
-  background: linear-gradient(135deg, #1E88E5 0%, #42A5F5 100%);
-  border-radius: 24rpx;
-  padding: 32rpx;
   margin-bottom: 32rpx;
-  box-shadow: 0 8rpx 24rpx rgba(30, 136, 229, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.daily-word-header {
+.daily-word-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.daily-word-card:active::before {
+  opacity: 1;
+}
+
+.card-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 12rpx;
   margin-bottom: 24rpx;
 }
 
-.daily-word-label {
-  font-size: 28rpx;
-  color: #FFFFFF;
-  font-weight: 500;
+.card-icon {
+  font-size: 32rpx;
 }
 
-.daily-word-date {
-  font-size: 24rpx;
+.card-title {
+  font-size: 28rpx;
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.8);
 }
 
-.daily-word-content {
+.term-content {
   margin-bottom: 32rpx;
 }
 
-.daily-word-name {
+.term-name {
   display: block;
   font-size: 40rpx;
-  color: #FFFFFF;
   font-weight: bold;
-  margin-bottom: 12rpx;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 8rpx;
+  font-family: var(--font-display);
 }
 
-.daily-word-en {
+.term-name-en {
   display: block;
-  font-size: 28rpx;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 20rpx;
 }
 
-.daily-word-definition {
+.term-definition {
   display: block;
   font-size: 28rpx;
-  color: rgba(255, 255, 255, 0.95);
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.8;
+  text-align: justify;
 }
 
-.daily-word-actions {
+.card-actions {
   display: flex;
-  gap: 16rpx;
+  justify-content: space-around;
+  padding-top: 24rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.1);
 }
 
 .action-btn {
-  flex: 1;
-  height: 64rpx;
-  line-height: 64rpx;
-  font-size: 28rpx;
-  color: #FFFFFF;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 32rpx;
-  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  transition: all 0.3s ease;
 }
 
-.action-btn::after {
-  border: none;
+.action-btn:active {
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.checkin-btn {
-  background-color: #FF9800;
+.action-icon {
+  font-size: 40rpx;
 }
 
-.checked-btn {
-  background-color: rgba(255, 255, 255, 0.3);
+.action-text {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-/* 分类入口 */
+/* 分类区域 */
 .categories-section {
   margin-bottom: 32rpx;
 }
 
-.section-title {
-  display: block;
-  font-size: 32rpx;
-  color: #333333;
-  font-weight: bold;
-  margin-bottom: 24rpx;
+.categories-scroll {
+  width: 100%;
 }
 
-.categories-scroll {
-  white-space: nowrap;
+.categories-list {
+  display: flex;
+  gap: 20rpx;
+  padding-bottom: 8rpx;
 }
 
 .category-item {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  width: 140rpx;
-  margin-right: 24rpx;
+  flex-shrink: 0;
+  width: 200rpx;
+  padding: 24rpx;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.category-item:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .category-icon {
+  display: block;
   font-size: 48rpx;
   margin-bottom: 12rpx;
 }
 
 .category-name {
-  font-size: 26rpx;
-  color: #333333;
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 8rpx;
 }
 
 .category-desc {
+  display: block;
   font-size: 22rpx;
-  color: #999999;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-/* 热门名词 */
+/* 热门名词区域 */
 .hot-terms-section {
-  background-color: #FFFFFF;
-  border-radius: 24rpx;
-  padding: 32rpx;
+  margin-bottom: 32rpx;
 }
 
 .section-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 12rpx;
   margin-bottom: 24rpx;
 }
 
-.section-more {
-  font-size: 24rpx;
-  color: #1E88E5;
+.section-icon {
+  font-size: 32rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .hot-terms-list {
   display: flex;
   flex-direction: column;
+  gap: 16rpx;
 }
 
 .hot-term-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #F5F7FA;
+  padding: 24rpx;
+  transition: all 0.3s ease;
 }
 
-.hot-term-item:last-child {
-  border-bottom: none;
+.hot-term-item:active {
+  transform: translateY(-4rpx);
+  border-color: rgba(0, 217, 255, 0.3);
+}
+
+.hot-term-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
 }
 
 .hot-term-name {
-  font-size: 28rpx;
-  color: #333333;
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.difficulty-tag {
+  padding: 6rpx 16rpx;
+  border-radius: 16rpx;
+  font-size: 22rpx;
   font-weight: 500;
 }
 
-.hot-term-tag {
-  font-size: 22rpx;
-  padding: 8rpx 16rpx;
-  border-radius: 16rpx;
-  background-color: #E3F2FD;
-  color: #1E88E5;
+.difficulty-tag[wx:if="{{item.difficulty === 1}}"] {
+  background: rgba(0, 217, 255, 0.15);
+  color: #00d9ff;
 }
 
-.hot-term-tag.tag-1 {
-  background-color: #E8F5E9;
-  color: #4CAF50;
+.difficulty-tag[wx:if="{{item.difficulty === 2}}"] {
+  background: rgba(183, 148, 246, 0.15);
+  color: #b794f6;
 }
 
-.hot-term-tag.tag-2 {
-  background-color: #FFF3E0;
-  color: #FF9800;
+.difficulty-tag[wx:if="{{item.difficulty === 3}}"] {
+  background: rgba(236, 72, 153, 0.15);
+  color: #ec4899;
 }
 
-.hot-term-tag.tag-3 {
-  background-color: #F3E5F5;
-  color: #7E57C2;
+.hot-term-category {
+  display: block;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+}
+
+.loading-spinner {
+  width: 64rpx;
+  height: 64rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.1);
+  border-top-color: #00d9ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 26rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  opacity: 0.5;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 28rpx;
+}
+
+.empty-hint {
+  margin-top: 16rpx;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 24rpx;
 }

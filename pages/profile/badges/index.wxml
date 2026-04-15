@@ -1,0 +1,24 @@
+<!--pages/profile/badges/index.wxml - 勋章墙页 (宇宙星空主题)-->
+<view class="container">
+  <view class="cosmic-bg"></view>
+  
+  <view class="header">
+    <text class="page-title">🏅 勋章墙</text>
+    <text class="page-subtitle">已解锁 {{unlockedCount}}/{{badges.length}} 个勋章</text>
+  </view>
+
+  <scroll-view class="badges-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="badges-grid">
+      <view 
+        class="badge-item glass-card {{item.unlocked ? 'unlocked' : 'locked'}}"
+        wx:for="{{badges}}"
+        wx:key="badgeId"
+      >
+        <text class="badge-icon">{{item.icon}}</text>
+        <text class="badge-name">{{item.name}}</text>
+        <text class="badge-condition">{{item.condition}}</text>
+        <text class="badge-date" wx:if="{{item.unlocked && item.unlockedAt}}">解锁于：{{formatDate(item.unlockedAt)}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
