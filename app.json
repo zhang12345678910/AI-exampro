@@ -36,19 +36,19 @@
         "selectedIconPath": "images/home-active.png"
       },
       {
-        "pagePath": "pages/dictionary/list",
+        "pagePath": "pages/dictionary/list/index",
         "text": "词典",
         "iconPath": "images/dictionary.png",
         "selectedIconPath": "images/dictionary-active.png"
       },
       {
-        "pagePath": "pages/learning/level",
+        "pagePath": "pages/learning/level/index",
         "text": "学习",
         "iconPath": "images/learn.png",
         "selectedIconPath": "images/learn-active.png"
       },
       {
-        "pagePath": "pages/profile/index",
+        "pagePath": "pages/profile/index/index",
         "text": "我的",
         "iconPath": "images/profile.png",
         "selectedIconPath": "images/profile-active.png"
