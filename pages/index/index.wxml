@@ -116,51 +116,6 @@
       </view>
     </view>
 
-    <!-- 分类入口 -->
-    <view class="categories-section">
-      <scroll-view class="categories-scroll" scroll-x show-scrollbar="{{false}}">
-        <view class="categories-list">
-          <view 
-            class="category-item glass-card"
-            wx:for="{{categories}}"
-            wx:key="id"
-            data-id="{{item.id}}"
-            bindtap="selectCategory"
-          >
-            <text class="category-icon">{{item.icon}}</text>
-            <text class="category-name">{{item.name}}</text>
-            <text class="category-desc">{{item.desc}}</text>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
-
-    <!-- 热门名词 -->
-    <view class="hot-terms-section">
-      <view class="section-header">
-        <text class="section-icon">🔥</text>
-        <text class="section-title">热门名词</text>
-      </view>
-      
-      <view class="hot-terms-list">
-        <view 
-          class="hot-term-item glass-card"
-          wx:for="{{hotTerms}}"
-          wx:key="id"
-          data-id="{{item.id}}"
-          bindtap="goToDetail"
-        >
-          <view class="hot-term-header">
-            <text class="hot-term-name">{{item.name}}</text>
-            <view class="difficulty-tag" wx:if="{{item.difficulty === 1}}">入门</view>
-            <view class="difficulty-tag" wx:if="{{item.difficulty === 2}}">进阶</view>
-            <view class="difficulty-tag" wx:if="{{item.difficulty === 3}}">专业</view>
-          </view>
-          <text class="hot-term-category">{{item.category}}</text>
-        </view>
-      </view>
-    </view>
-
     <!-- 加载中 -->
     <view class="loading-container" wx:if="{{loading}}">
       <view class="loading-spinner"></view>
@@ -172,26 +127,6 @@
       <text class="empty-icon">🔍</text>
       <text class="empty-text">暂无数据</text>
       <text class="empty-hint">下拉刷新试试</text>
-    </view>
-  </scroll-view>
-
-  <!-- 底部导航栏 -->
-  <view class="tab-bar">
-    <view 
-      class="tab-item {{currentTab === 'home' ? 'active' : ''}}"
-      data-tab="home"
-      bindtap="switchTab"
-    >
-      <text class="tab-icon">🏠</text>
-      <text class="tab-label">首页</text>
-    </view>
-    <view 
-      class="tab-item {{currentTab === 'dictionary' ? 'active' : ''}}"
-      data-tab="dictionary"
-      bindtap="switchTab"
-    >
-      <text class="tab-icon">📖</text>
-      <text class="tab-label">词典</text>
     </view>
   </scroll-view>
 </view>
