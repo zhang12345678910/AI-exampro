@@ -90,7 +90,7 @@ exports.main = async (event, context) => {
     
     // 4. 更新用户打卡记录
     const updateData = {
-      'checkInCalendar.' + today: true,
+      [`checkInCalendar.${today}`]: true,
       'stats.continuousCheckInDays': continuousDays,
       'stats.totalCheckInDays': (user.stats.totalCheckInDays || 0) + 1,
       lastLoginAt: db.serverDate()
