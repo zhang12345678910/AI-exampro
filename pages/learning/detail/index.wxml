@@ -1,0 +1,10 @@
+<!--pages/learning/detail/index.wxml - 学习详情页 (临时占位)-->
+<view class="container">
+  <view class="cosmic-bg"></view>
+  <view class="empty-container">
+    <text class="empty-icon">🚧</text>
+    <text class="empty-text">功能开发中</text>
+    <text class="empty-hint">学习详情页即将上线</text>
+    <view class="back-btn" bindtap="goBack">返回</view>
+  </view>
+</view>
