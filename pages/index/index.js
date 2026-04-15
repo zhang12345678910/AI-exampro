@@ -73,10 +73,11 @@ Page({
     this.setData({ loading: true });
     
     try {
-      // 云函数调用
+      // 云函数调用 (设置超时)
       const res = await wx.cloud.callFunction({
         name: 'getDailyWord',
-        data: {}
+        data: {},
+        timeout: 5000 // 5 秒超时
       });
       
       if (res.result && res.result.success) {
@@ -84,9 +85,11 @@ Page({
           dailyWord: res.result.data,
           loading: false
         });
+      } else {
+        throw new Error('云函数返回失败');
       }
     } catch (err) {
-      console.error('加载每日一词失败:', err);
+      console.warn('⚠️ 云函数调用失败，使用本地数据:', err.message);
       
       // 降级：使用本地数据
       try {
