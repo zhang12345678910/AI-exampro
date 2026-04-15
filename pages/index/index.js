@@ -42,6 +42,10 @@ Page({
     this.loadSearchHistory();
   },
 
+  onReady: function () {
+    // 页面渲染完成
+  },
+
   onShow: function () {
     this.checkTodayCheckIn();
   },
