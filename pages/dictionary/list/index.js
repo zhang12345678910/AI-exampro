@@ -1,6 +1,6 @@
 // pages/dictionary/list/index.js - 词典列表页逻辑 (宇宙星空主题)
 const app = getApp();
-const pinyin = require('../../utils/pinyin.js');
+const pinyin = require('../../../utils/pinyin.js');
 
 Page({
   data: {
