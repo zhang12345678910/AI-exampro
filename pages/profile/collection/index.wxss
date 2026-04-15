@@ -83,13 +83,11 @@
   color: rgba(255, 255, 255, 0.95);
 }
 
+/* 难度标签 - 统一样式 */
 .difficulty-tag {
   padding: 6rpx 16rpx;
   border-radius: 16rpx;
   font-size: 22rpx;
-}
-
-.difficulty-tag[wx:if="{{item.difficulty === 1}}"] {
   background: rgba(0, 217, 255, 0.15);
   color: #00d9ff;
 }
