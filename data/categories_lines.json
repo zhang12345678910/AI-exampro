@@ -1,0 +1,7 @@
+{"_id":"cat_001","name":"大模型","level":1,"parentId":null,"icon":"🤖","description":"大语言模型相关概念","order":1,"subCategories":[{"id":"cat_001_1","name":"基础概念","level":2},{"id":"cat_001_2","name":"模型架构","level":2},{"id":"cat_001_3","name":"应用技术","level":2}]}
+{"_id":"cat_002","name":"深度学习","level":1,"parentId":null,"icon":"🧠","description":"深度学习核心概念","order":2,"subCategories":[{"id":"cat_002_1","name":"神经网络","level":2},{"id":"cat_002_2","name":"训练方法","level":2}]}
+{"_id":"cat_003","name":"基础概念","level":1,"parentId":null,"icon":"📚","description":"AI 基础术语","order":3,"subCategories":[{"id":"cat_003_1","name":"入门必备","level":2}]}
+{"_id":"cat_004","name":"AIGC","level":1,"parentId":null,"icon":"🎨","description":"生成式 AI 相关","order":4,"subCategories":[{"id":"cat_004_1","name":"图像生成","level":2},{"id":"cat_004_2","name":"文本生成","level":2}]}
+{"_id":"cat_005","name":"机器学习","level":1,"parentId":null,"icon":"🤖","description":"机器学习相关概念","order":5,"subCategories":[{"id":"cat_005_1","name":"监督学习","level":2},{"id":"cat_005_2","name":"无监督学习","level":2},{"id":"cat_005_3","name":"强化学习","level":2}]}
+{"_id":"cat_006","name":"计算机视觉","level":1,"parentId":null,"icon":"👁️","description":"图像识别与处理","order":6,"subCategories":[{"id":"cat_006_1","name":"图像分类","level":2},{"id":"cat_006_2","name":"目标检测","level":2}]}
+{"_id":"cat_007","name":"自然语言处理","level":1,"parentId":null,"icon":"💬","description":"语言理解与生成","order":7,"subCategories":[{"id":"cat_007_1","name":"文本分析","level":2},{"id":"cat_007_2","name":"机器翻译","level":2}]}

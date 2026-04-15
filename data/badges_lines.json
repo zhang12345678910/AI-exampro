@@ -1,0 +1,8 @@
+{"_id":"badge_001","name":"初出茅庐","description":"首次学习","icon":"🌱","condition":{"type":"learn_term","value":1},"order":1}
+{"_id":"badge_003","name":"入门小能手","description":"连续打卡 3 天","icon":"🏅","condition":{"type":"continuous_checkin","value":3},"order":3}
+{"_id":"badge_007","name":"坚持达人","description":"连续打卡 7 天","icon":"🔥","condition":{"type":"continuous_checkin","value":7},"order":7}
+{"_id":"badge_030","name":"月度王者","description":"连续打卡 30 天","icon":"👑","condition":{"type":"continuous_checkin","value":30},"order":30}
+{"_id":"badge_learn_50","name":"学习达人","description":"学习 50 个名词","icon":"📚","condition":{"type":"learn_terms","value":50},"order":50}
+{"_id":"badge_learn_100","name":"知识渊博","description":"学习 100 个名词","icon":"🎓","condition":{"type":"learn_terms","value":100},"order":100}
+{"_id":"badge_quiz_80","name":"测验高手","description":"测验得分≥80 分","icon":"✨","condition":{"type":"quiz_score","value":80},"order":80}
+{"_id":"badge_collect_20","name":"收藏家","description":"收藏 20 个名词","icon":"⭐","condition":{"type":"collect_terms","value":20},"order":20}
